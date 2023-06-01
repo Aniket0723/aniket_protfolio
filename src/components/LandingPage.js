@@ -26,7 +26,7 @@ const StyledLandingPage = styled.section`
   & > * {
     -webkit-font-smoothing: antialiased;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     width: 100%;
     min-height: 96vh;
     flex-direction: column;
@@ -41,7 +41,7 @@ const StyledLeft = styled.div`
   @media (max-width: 999px) {
     height: 700px;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     width: 90%;
     height: 250px;
   }
@@ -58,11 +58,11 @@ const StyledRight = styled.div`
     min-width: 350px;
     width: 80%;
     height: 550px;
-    @media (max-width: 500px) {
+    @media (max-width: 400px) {
       height: 350px;
     }
   }
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     height: auto;
     margin-top:200px
   }
@@ -75,7 +75,7 @@ const StyledH4 = styled.h4`
   font-family: 'Roboto Mono', monospace;
   margin-bottom: 8px;
   transition: color 0.5s linear;
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     padding-left: 0.4rem;
     padding-top: 1rem;
   }
@@ -101,7 +101,7 @@ const StyledP = styled.p`
   transition: color 0.5s linear;
   color: ${(props) => props.theme.lightText};
   line-height: 1.5;
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     width: 100%;
     font-size: 16px;
     margin-top: 5px;

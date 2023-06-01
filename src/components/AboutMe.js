@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNav } from "../hooks/useNav";
 import { Fade } from "react-awesome-reveal";
 const StyledAboutMeWrapper = styled.section`
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     width: 100%;
   }
 `;
@@ -21,7 +21,7 @@ const StyledAboutMe = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     padding: 0 1.2rem;
     margin-top:-5rem;
   }
@@ -33,7 +33,7 @@ const H1 = styled.h1`
   margin-top: 4rem;
   padding-top: 1rem;
   font-family: "Inter", sans-serif;
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     margin-top: 4.5rem;
   }
 `;
@@ -93,7 +93,7 @@ const H3Left = styled.h3`
     font-size: clamp(10px, 5.5vw, 25px);
     text-align: center;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     padding: 1rem 0;
   }
 `;
@@ -119,7 +119,7 @@ const StyledExp = styled.div`
     display: flex;
     justify-content: center;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     padding: 0;
   }
 `;
@@ -135,7 +135,7 @@ const StyledLiContent = styled.div`
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     width: 95%;
     padding: 0.5rem;
   }
@@ -184,7 +184,7 @@ const StyledLi = styled.li`
     color: ${(props) => props.theme.lightText};
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     margin-left: 0;
 
     div {
