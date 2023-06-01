@@ -160,7 +160,7 @@ const LandingPage = ({ theme }) => {
                 collaborate in a team setting.
               </StyledP>
               <Link
-                to="https://doc-10-3g-docs.googleusercontent.com/docs/securesc/emjga159f59d0nrt93qdl7rig7fmv4d6/ebbg3v1g8jjjf0fr4stobb6lapk485dv/1685532900000/08172353182772694968/08172353182772694968/1UEEM3Ft4GAc1NpyU6NNpv_fV8RyLNFo_?e=download&ax=ADWCPKBahE9dZtbRrPrcUXvPz3iXPKJ98t__hmNvE-eqDekTHDgR3ytEXW2i6cChm5ToXBvv3eT3GyFZGXfUJ_Bk3PsLaIUnglWdPWgwo7_QbdvnfC9j9Z85i7uss_trpGk5jfkB-k1ixctcdzDEDtuJ99yemoEwdBw8xxymBe9VzigelOTERQN-LC1PI0FLmPoNH5b3V4n1XpRjbojiTJ83KWhdssOr4YMHhsyKqstrz8tHq63E-asmzrs5KpjIrKoWIidDBHg8ZC4y2MoheXBSV9TUBWwoyYfIEcFNEMLmlAfI6jXNhtuQXT0DnNnlRk2LnP3GMqDJjzRuDxtrlUAMOVd5TdYRKq1Wa7yfdKMw9kUxpsaPxV9yF87-gb9_NNiUqKelR65rrFNT4GGxqgNSaJ8HMfeLpRBpeeUEeO7RPUc4qpfrSlJQGXon3OOY7AtljHD4BlcK1bxvRBeKDSkPpn8cWECNW9Xw0BJ3Tt8qAM81cZa0bWHF4YFNV9M2tcr_31YVcNDxbx0Vho-XMrV6k_jDfEOdRedHqToFKLPBRLiJck8tGyychX6vyjNFNZ_6Tds_FoZJRVpb2glFGth6-IgWQBjazesXEEhkQOzf_3FWhQHETRb9alYjOiNFzWSt9iH1mi7YSFZo7okfRp0W6UN_JF3LvQ3lY3kH09pKH_-JnGSggEc0YxoruSS_k3KfEck0ub-gbCGjh22f9ybG1-DA88mUv5T6CP7VWcP4xdwH7kUb9TAA52b7X-M1hIx5Q-RXFXuHkq3jVqqPDf8CKSvzbKazb1yOnMTRPvZ70x_qu7w-QwnQ1aD40XJySENYne17dRqpj_alXKh4N25NZ4ixRL148BkUTLqP3HH4oejkl-oTkXlYv_y9bzer7lM&uuid=192206d1-8167-4ae1-a952-7774471047c8&authuser=0&nonce=av6n10hbpjie0&user=08172353182772694968&hash=39br9hsmbj29e4hjqb2nkn4i4qvijn7v"
+                to="https://drive.google.com/uc?export=download&id=1k313Tk98TJh6JsMeosTlJkoiN2diXiqr"
                 style={linkStyle}
               >
                 Download Resume

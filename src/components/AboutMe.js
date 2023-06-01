@@ -296,7 +296,7 @@ const AboutMe = () => {
                           <p>DevTown</p>
                           <span>Nov 2022 - Feb 2023 </span>
                           <Link
-                            to="https://doc-0o-3g-docs.googleusercontent.com/docs/securesc/emjga159f59d0nrt93qdl7rig7fmv4d6/d9hoasne0u5jd692pqvt683fok9dirik/1685514900000/08172353182772694968/08172353182772694968/1RduiAmRNObyasTk-miy5ir1rFC7oZLY7?e=download&ax=ADWCPKAW4NHMaZ002navyZNRCCZjM_rzY_vET3bmAEoK8vK4Q1sLDIqPYs-MlRDHsJMm-wELzhp_2Jj7BnRDhCW0xSm3ou5_omn81HIGsRj02rJ78df8GMdTvY457vccYDe4PwTcBB4Vl3Gz-jITx8UtplCL-xPbrRwuOrK98mN-JpvT7hp5DpBP6F1cpaaIfS813ZxTZvBvKJS1WIGBCpnmbuk83qGXPLruIyRKhgPNk_TBKzNJXALULrAh9c1mxHroRsgpubNvKADdoU9J63NXiNpG8mjq0O985Zu1Tn-msjFTx30Cggr6HlqUPPDm9RgagJhViO01iXJ9jZZd1hWeF96umO9xBYrspwt5B0Pw8HLt_hAK5B4AeLFBZWbaaUCGanMEj3rXT37yUlCK1XLmZiL1Xy9dap6jJ7A3NG3mc66kdMqo611mtrTujLJ0Qn9eCwZe_fgQBr3ymzhZ68Hfexmm2nDhuBeH4uov1Nd-Q8_5y4_8v9EKUKXr8-lLl94fdvdvb2r6lSSdiVjk_LKWvNRr1_pDkCX-K-Lwn0YOJ_VYaLRjMbjtaAfBmZpYHN39cjKHWO_oFLN6n-9QUNTool9ujbKnb9RekeVXawHMFpALPAUdD-fKShxh4AatAxqXc-iOOr0ChS77xbERtrS_ItDqVfcA53X5FEFKw6GRozpffIjfbNTaFlekXoHVTZud1cf3J04KU3QeRoTo-5dpezr6kcsY4RUQ3IjOPSgX2pcgZKeSenlQNZzjeqFMkeigNVm93kkHP4ERMUJBBX4tLSMrbLqGKgnehFfXynWyLPNqRR4u5T-Z6fk4gEg7mO-A8f6KeyoQjlnUZeNAi9lpxPpe8F2_PwVu5jnJOqHjnP_YMw387Pcrg2feMzyz8Qw&uuid=4552d7ed-2188-4779-851b-d529ee65c010&authuser=0&nonce=nmgki8rsc7j6s&user=08172353182772694968&hash=on9p89hoq2io1um5slgi0levacqofcot"
+                            to="https://drive.google.com/uc?export=download&id=1RduiAmRNObyasTk-miy5ir1rFC7oZLY7"
                             style={linkStyle}
                           >
                             Certificate{" "}
