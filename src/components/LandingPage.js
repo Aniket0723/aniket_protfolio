@@ -10,7 +10,7 @@ const StyledWrapper = styled.section`
   transition: background-image 0.5s linear;
   background-repeat: no-repeat;
   background-size: cover;
-`;
+`
 
 const StyledLandingPage = styled.section`
   color: ${(props) => props.theme.landingPage.text};
@@ -29,10 +29,10 @@ const StyledLandingPage = styled.section`
   @media (max-width: 500px) {
     width: 100%;
     min-height: 96vh;
-    margin-top: -2rem;
     flex-direction: column;
+    column-gap:20px
   }
-`;
+`
 const StyledLeft = styled.div`
   /* border: 1px solid red; */
   width: 50%;
@@ -44,9 +44,8 @@ const StyledLeft = styled.div`
   @media (max-width: 500px) {
     width: 90%;
     height: 250px;
-    margin-top:30px
   }
-`;
+`
 const StyledRight = styled.div`
   width: 50%;
   /* border: 1px solid tan; */
@@ -55,49 +54,46 @@ const StyledRight = styled.div`
   align-items: flex-start;
   justify-content: center;
   img {
-    /*border: 1px solid rosybrown;*/
+    /* border: 1px solid rosybrown; */
     min-width: 350px;
     width: 80%;
     height: 550px;
     @media (max-width: 500px) {
-      margin-top:20px;
-      padding:10px
-      height:350px;
-      opacity:1;
+      height: 350px;
     }
   }
   @media (max-width: 500px) {
-    margin-top:10px;
-    height:100%;
+    height: auto;
+    margin-top:200px
   }
-`;
+`
 
 const StyledH4 = styled.h4`
   font-size: 20px;
   font-weight: 400;
   padding-left: 0.9rem;
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
   margin-bottom: 8px;
   transition: color 0.5s linear;
   @media (max-width: 500px) {
     padding-left: 0.4rem;
     padding-top: 1rem;
   }
-`;
+`
 const StyledH1 = styled.h1`
   font-size: clamp(35px, 8vw, 80px);
   font-weight: 600;
   line-height: 1.1;
   transition: color 0.5s linear;
-  font-family: "Inter", sans-serif;
-`;
+  font-family: 'Inter', sans-serif;
+`
 const StyledH3 = styled.h3`
   font-size: clamp(10px, 5.5vw, 50px);
   font-weight: 600;
   margin: 8px 0;
   transition: color 0.5s linear;
-  font-family: "Inter", sans-serif;
-`;
+  font-family: 'Inter', sans-serif;
+`
 const StyledP = styled.p`
   /* width: 650px; */
   max-width: 650px;
@@ -110,7 +106,7 @@ const StyledP = styled.p`
     font-size: 16px;
     margin-top: 5px;
   }
-`;
+`
 const LandingPage = ({ theme }) => {
   const linkStyle = {
     fontSize: "1.2rem",
@@ -173,7 +169,7 @@ const LandingPage = ({ theme }) => {
             </Fade>
           </StyledLeft>
           <StyledRight>
-            <Fade delay={500} direction="up" triggerOnce>
+            <Fade delay={4000} triggerOnce>
               <img
                 src={
                   theme === "darkTheme"

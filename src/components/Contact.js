@@ -7,6 +7,7 @@ const StyledContactWrapper = styled.section`
   box-sizing: border-box;
   padding-top: 3px;
   padding-bottom: 4rem;
+  margin-top:-6rem;
 `;
 const StyledContact = styled.div`
   width: 80%;
@@ -35,7 +36,7 @@ const H1 = styled.h1`
   color: ${(props) => props.theme.text};
 
   @media (max-width: 500px) {
-    margin: 5rem 0;
+    margin: 3rem 0;
   }
 `;
 const P = styled.p`

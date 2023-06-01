@@ -27,6 +27,7 @@ const StyledProjects = styled.section`
   }
   @media (max-width: 500) {
     width: 95%;
+    
   }
 `;
 const H3 = styled.h3`
@@ -54,7 +55,7 @@ const H3 = styled.h3`
   }
 
   @media (max-width: 500px) {
-    /* margin-top: 4.5rem; */
+     margin-top: -7rem; 
   }
 `;
 const P = styled.p`

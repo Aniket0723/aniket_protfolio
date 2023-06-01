@@ -23,6 +23,7 @@ const StyledAboutMe = styled.section`
   justify-content: center;
   @media (max-width: 500px) {
     padding: 0 1.2rem;
+    margin-top:-5rem;
   }
 `;
 
