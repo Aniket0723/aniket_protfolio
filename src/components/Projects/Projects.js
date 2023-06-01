@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components/macro'
-import { useNav } from '../../hooks/useNav'
-import { FeaturedProjectsList } from '../assets/projects'
-import { Fade } from 'react-awesome-reveal'
+import React from "react";
+import styled from "styled-components/macro";
+import { useNav } from "../../hooks/useNav";
+import { FeaturedProjectsList } from "../assets/projects";
+import { Fade } from "react-awesome-reveal";
 
 const StyledProjectsWrapper = styled.section`
   width: 100%;
@@ -10,7 +10,7 @@ const StyledProjectsWrapper = styled.section`
   min-height: 100vh;
   transition: ${(props) => props.theme.themeTransition.transition};
   background-color: ${(props) => props.theme.body};
-`
+`;
 
 const StyledProjects = styled.section`
   width: 80%;
@@ -28,17 +28,17 @@ const StyledProjects = styled.section`
   @media (max-width: 500) {
     width: 95%;
   }
-`
+`;
 const H3 = styled.h3`
   font-size: clamp(40px, 5.5vw, 60px);
   margin-bottom: 2rem;
   padding-top: 5rem;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   display: flex;
   color: ${(props) => props.theme.text};
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     position: relative;
     top: 37px;
@@ -56,7 +56,7 @@ const H3 = styled.h3`
   @media (max-width: 500px) {
     /* margin-top: 4.5rem; */
   }
-`
+`;
 const P = styled.p`
   line-height: 1.2;
   font-size: clamp(18px, 4vw, 22px);
@@ -65,7 +65,7 @@ const P = styled.p`
   @media (max-width: 500px) {
     margin-bottom: 2rem;
   }
-`
+`;
 
 const StyledFeaturedProjects = styled.div`
   /* border: 1px solid #404040; */
@@ -93,7 +93,7 @@ const StyledFeaturedProjects = styled.div`
     border-radius: 8px;
     margin-top: 1rem;
   }
-`
+`;
 const StyledLeft = styled.div`
   width: 50%;
   /* border: 5px solid teal; */
@@ -112,15 +112,15 @@ const StyledLeft = styled.div`
   }
 
   @media (max-width: 500px) {
-    width: 100%;
+    width: 40%;
     /* height: 280px; */
     background-color: white;
     /* background-size: ${(props) => props.theme.backgroundSize}; */
     padding: ${(props) => props.theme.projectCardPaddingInner};
     border-radius: 8px;
-    opacity: 0.4;
+    opacity: 0;
   }
-`
+`;
 const StyledRight = styled.div`
   width: 50%;
   /* border: 1px solid orange; */
@@ -132,7 +132,7 @@ const StyledRight = styled.div`
     text-align: right;
     font-size: 1.5rem;
     line-height: 2rem;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
     color: ${(props) => props.theme.text};
@@ -142,7 +142,7 @@ const StyledRight = styled.div`
     }
   }
   h1 {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 500;
     letter-spacing: 0.3px;
     margin-bottom: 1rem;
@@ -194,14 +194,14 @@ const StyledRight = styled.div`
     color: black;
     z-index: 999;
   }
-`
+`;
 const StyledLanguagesUsed = styled.div`
   display: flex;
   margin-top: 2rem;
   float: right;
   font-size: 13.5px;
   justify-content: space-evenly;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   color: ${(props) => props.theme.lightText};
   span {
     padding-left: 0.4rem;
@@ -215,7 +215,7 @@ const StyledLanguagesUsed = styled.div`
     float: left;
     margin-top: 0rem;
   }
-`
+`;
 const StyledLinks = styled.div`
   margin-top: 6rem;
   padding-top: 0.5rem;
@@ -240,17 +240,17 @@ const StyledLinks = styled.div`
     margin-top: 1.7rem;
     text-align: left;
   }
-`
+`;
 
 const Projects = ({ theme }) => {
-  const projectsRef = useNav('Projects')
+  const projectsRef = useNav("Projects");
   return (
     <StyledProjectsWrapper>
-      <StyledProjects id='projectsContainer' ref={projectsRef}>
+      <StyledProjects id="projectsContainer" ref={projectsRef}>
         <H3
-          aria-level='1'
-          title='Some things i have built'
-          aria-label='Display Projects'
+          aria-level="1"
+          title="Some things i have built"
+          aria-label="Display Projects"
         >
           Some Things I’ve Built
         </H3>
@@ -258,7 +258,7 @@ const Projects = ({ theme }) => {
           Here are some of my most favourite projects that I enjoyed coding and
           designing from scratch.
         </P>
-        <Fade className='fade' cascade delay='1.8' triggerOnce>
+        <Fade className="fade" cascade delay="1.8" triggerOnce>
           {FeaturedProjectsList.map((project) => {
             return (
               <StyledFeaturedProjects key={project.id}>
@@ -270,53 +270,53 @@ const Projects = ({ theme }) => {
 
                   <StyledLanguagesUsed>
                     {project.languages.map((language) => {
-                      return <span key={language}>{language}</span>
+                      return <span key={language}>{language}</span>;
                     })}
                   </StyledLanguagesUsed>
                   <StyledLinks>
                     <a
                       href={project.github}
-                      target='_blank'
-                      rel='noreferrer'
-                      aria-label='github link'
-                      title='github link'
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="github link"
+                      title="github link"
                     >
                       <img
                         src={
-                          theme === 'darkTheme'
-                            ? 'images/githubDark.png'
-                            : 'images/githubLight.png'
+                          theme === "darkTheme"
+                            ? "images/githubDark.png"
+                            : "images/githubLight.png"
                         }
-                        alt='Github link'
-                        aria-label='github link'
+                        alt="Github link"
+                        aria-label="github link"
                       />
                     </a>
                     <a
                       href={project.live}
-                      target='_blank'
-                      rel='noreferrer'
-                      aria-label='live project link'
-                      title='live project link'
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="live project link"
+                      title="live project link"
                     >
                       <img
                         src={
-                          theme === 'darkTheme'
-                            ? 'images/externalLinkDark.png'
-                            : 'images/externalLinkLight.png'
+                          theme === "darkTheme"
+                            ? "images/externalLinkDark.png"
+                            : "images/externalLinkLight.png"
                         }
-                        alt='Github link'
-                        aria-label='github link'
+                        alt="Github link"
+                        aria-label="github link"
                       />
                     </a>
                   </StyledLinks>
                 </StyledRight>
               </StyledFeaturedProjects>
-            )
+            );
           })}
         </Fade>
       </StyledProjects>
     </StyledProjectsWrapper>
-  )
-}
+  );
+};
 
-export default Projects
+export default Projects;

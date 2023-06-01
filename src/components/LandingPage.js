@@ -44,6 +44,7 @@ const StyledLeft = styled.div`
   @media (max-width: 500px) {
     width: 90%;
     height: 250px;
+    margin-top:30px
   }
 `;
 const StyledRight = styled.div`
@@ -54,16 +55,20 @@ const StyledRight = styled.div`
   align-items: flex-start;
   justify-content: center;
   img {
-    /* border: 1px solid rosybrown; */
+    /*border: 1px solid rosybrown;*/
     min-width: 350px;
     width: 80%;
     height: 550px;
     @media (max-width: 500px) {
-      height: 350px;
+      margin-top:20px;
+      padding:10px
+      height:350px;
+      opacity:1;
     }
   }
   @media (max-width: 500px) {
-    height: auto;
+    margin-top:10px;
+    height:100%;
   }
 `;
 
