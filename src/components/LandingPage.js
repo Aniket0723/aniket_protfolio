@@ -153,8 +153,7 @@ const LandingPage = ({ theme }) => {
               </StyledH3>
               <br />
               <StyledP aria-label="paragraph" role="article" tabIndex="0">
-                I&apos; am trained fresher. Willing to join growing organization
-                to utilize my technology and skills in an esteemed organization.
+                I&apos; am freelance Web Developer helping business to grow with custom professional website that look great, load fast, work on all devices and are easy to update.
                 Proficient in an assortment of technologies, including
                 JavaScript, React.js, Node.js, Express.js and MongoDB. Able to
                 effectively self-manage during independent project, as well as
