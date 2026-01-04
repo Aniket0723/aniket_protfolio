@@ -40,7 +40,7 @@ const SectionHeader = styled.div`
 
 const SectionTitle = styled.h2`
   font-family: "Syne", sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
   display: flex;
@@ -186,7 +186,7 @@ const Column = styled.div`
 
 const TechnicalSkillsTitle = styled.h2`
   font-family: "Syne", sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
   display: flex;

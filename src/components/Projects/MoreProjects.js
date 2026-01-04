@@ -13,7 +13,7 @@ const StyledMoreProjectsSection = styled.section`
 
 const SectionTitle = styled.h3`
   font-family: "Syne", sans-serif;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 800;
   text-align: center;
   margin-bottom: 3rem;
