@@ -9,6 +9,10 @@ const StyledProjectsSection = styled.section`
   padding: 0 1rem 6rem;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 0 1.25rem 4rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -27,6 +31,11 @@ const SectionTitle = styled.h2`
     height: 1px;
     flex-grow: 1;
     background: ${(props) => props.theme.border};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
   }
 `;
 
@@ -81,10 +90,12 @@ const StyledImage = styled.img`
 `;
 
 const ProjectContent = styled.div`
-  padding: 1.5rem;
-  display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  @media (max-width: 768px) {
+    padding: 1.2rem;
+  }
 `;
 
 const ProjectHeader = styled.div`
@@ -106,6 +117,10 @@ const ProjectTitleLink = styled.a`
 
   &:hover {
     color: ${(props) => props.theme.secondaryText};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
   }
 `;
 
@@ -136,6 +151,12 @@ const ProjectFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 `;
 
 const TechStack = styled.div`

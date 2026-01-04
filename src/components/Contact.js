@@ -9,6 +9,10 @@ const StyledContactSection = styled.section`
   padding: 2rem 1rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.25rem 3rem;
+  }
 `;
 
 const ContactGrid = styled.div`
@@ -38,8 +42,9 @@ const SectionTitle = styled.h2`
   letter-spacing: 0.05em;
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: center;
+    margin-bottom: 2rem;
   }
 `;
 
@@ -54,6 +59,7 @@ const ContactInfo = styled.div`
   @media (max-width: 768px) {
     text-align: center;
     margin: 0 auto 2rem;
+    font-size: 1rem;
   }
 
   a {
@@ -81,7 +87,8 @@ const Form = styled.form`
 
   @media (max-width: 768px) {
     margin: 0 auto;
-    padding: 1.5rem;
+    padding: 1.2rem;
+    gap: 1rem;
   }
 `;
 

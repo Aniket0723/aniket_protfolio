@@ -55,6 +55,11 @@ const SectionTitle = styled.h2`
     flex-grow: 1;
     background: ${(props) => props.theme.border};
   }
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    gap: 0.5rem;
+  }
 `;
 
 const Timeline = styled.div`
@@ -74,12 +79,20 @@ const TimelineItem = styled.div`
   &:hover {
     border-color: ${(props) => props.theme.text};
   }
+
+  @media (max-width: 768px) {
+    padding-left: 1rem;
+  }
 `;
 
 const Role = styled.h3`
   font-size: 1.4rem;
   font-weight: 700;
   color: ${(props) => props.theme.text};
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const CompanyName = styled.p`
@@ -200,6 +213,11 @@ const TechnicalSkillsTitle = styled.h2`
     height: 1px;
     flex-grow: 1;
     background: ${(props) => props.theme.border};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    gap: 0.5rem;
   }
 `;
 

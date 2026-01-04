@@ -20,6 +20,11 @@ const StyledLandingPage = styled.section`
   justify-content: center;
   align-items: center;
   padding: 4rem 1rem;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.25rem;
+    min-height: auto;
+  }
 `;
 
 const HeroContent = styled.div`
@@ -67,6 +72,10 @@ const Headline = styled.h1`
   text-transform: uppercase;
   letter-spacing: -0.02em;
 
+  @media (max-width: 768px) {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
   span {
     color: ${(props) => props.theme.secondaryText};
   }
@@ -78,6 +87,11 @@ const SubHeadline = styled.p`
   max-width: 600px;
   line-height: 1.6;
   margin-bottom: 2.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const TechStack = styled.div`
@@ -86,6 +100,11 @@ const TechStack = styled.div`
   justify-content: center;
   gap: 0.75rem;
   margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const TechCapsule = styled.div`
@@ -109,6 +128,11 @@ const TechCapsule = styled.div`
 
   svg {
     font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
   }
 `;
 

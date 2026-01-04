@@ -9,6 +9,10 @@ const StyledMoreProjectsSection = styled.section`
   padding: 2rem 1rem 3rem;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.25rem;
+  }
 `;
 
 const SectionTitle = styled.h3`
@@ -19,6 +23,11 @@ const SectionTitle = styled.h3`
   margin-bottom: 3rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const CardGrid = styled.div`
@@ -32,6 +41,7 @@ const CardGrid = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 `;
 
@@ -84,6 +94,10 @@ const Title = styled.h4`
   color: ${(props) => props.theme.text};
   margin-bottom: 0.5rem;
   letter-spacing: 0.01em;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Description = styled.p`

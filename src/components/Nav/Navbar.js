@@ -39,6 +39,10 @@ const StyledName = styled.div`
   span {
     color: ${(props) => props.theme.secondaryText};
   }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const StyledLinks = styled.div`
@@ -103,7 +107,7 @@ const MobileMenu = styled(m.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 `;
 
 const CloseButton = styled.div`
