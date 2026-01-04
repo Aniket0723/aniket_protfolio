@@ -4,7 +4,9 @@ import { lightTheme, darkTheme } from "./components/Themes";
 import Main from "./components/Main";
 import Navbar from "./components/Nav/Navbar";
 import NavProvider from "./context/NavContext";
+import Footer from "./components/Footer";
 import { useState } from "react";
+
 function App() {
   const [theme, setTheme] = useState("darkTheme");
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +22,7 @@ function App() {
             setTheme={setTheme}
           />
           <Main theme={theme} isOpen={isOpen} />
+          <Footer />
         </NavProvider>
       </ThemeProvider>
     </>

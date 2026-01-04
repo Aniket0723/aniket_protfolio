@@ -13,7 +13,7 @@ const StyledMoreProjectsSection = styled.section`
 
 const SectionTitle = styled.h3`
   font-family: "Syne", sans-serif;
-  font-size: 2rem;
+  font-size: 2.8rem;
   font-weight: 800;
   text-align: center;
   margin-bottom: 3rem;
@@ -79,7 +79,7 @@ const Links = styled.div`
 
 const Title = styled.h4`
   font-family: "Syne", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: ${(props) => props.theme.text};
   margin-bottom: 0.5rem;
@@ -136,7 +136,7 @@ const MoreProjects = () => {
   return (
     <StyledMoreProjectsSection>
       <Fade direction="up" triggerOnce>
-        <SectionTitle>Other Noteworthy Projects</SectionTitle>
+        <SectionTitle>Other Projects</SectionTitle>
         <CardGrid>
           {OtherProjects.slice(0, visible).map((project) => (
             <ProjectCard key={project.id}>

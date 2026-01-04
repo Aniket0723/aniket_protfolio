@@ -6,7 +6,7 @@ import { FaPaperPlane } from "react-icons/fa";
 
 const StyledContactSection = styled.section`
   color: ${(props) => props.theme.text};
-  padding: 2rem 1rem 6rem;
+  padding: 2rem 1rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -30,7 +30,7 @@ const ContactContent = styled.div`
 
 const SectionTitle = styled.h2`
   font-family: "Syne", sans-serif;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
   text-align: left;
@@ -39,6 +39,7 @@ const SectionTitle = styled.h2`
 
   @media (max-width: 768px) {
     font-size: 2rem;
+    text-align: center;
   }
 `;
 
@@ -49,6 +50,11 @@ const ContactInfo = styled.div`
   line-height: 1.8;
   color: ${(props) => props.theme.secondaryText};
   max-width: 500px;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    margin: 0 auto 2rem;
+  }
 
   a {
     color: ${(props) => props.theme.text};
@@ -73,7 +79,8 @@ const Form = styled.form`
   max-width: 450px;
   width: 100%;
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
+    margin: 0 auto;
     padding: 1.5rem;
   }
 `;

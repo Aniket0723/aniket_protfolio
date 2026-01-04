@@ -13,7 +13,7 @@ const StyledProjectsSection = styled.section`
 
 const SectionTitle = styled.h2`
   font-family: "Syne", sans-serif;
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   font-weight: 800;
   margin-bottom: 3rem;
   display: flex;
@@ -96,7 +96,7 @@ const ProjectHeader = styled.div`
 
 const ProjectTitleLink = styled.a`
   font-family: "Syne", sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: ${(props) => props.theme.text};
   display: flex;

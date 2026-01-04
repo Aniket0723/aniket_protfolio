@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { HiMenu } from "react-icons/hi";
 import NavLink from "./NavLink";
 import { navLinks } from "./navLinks";
 import { m, domAnimation, LazyMotion } from "framer-motion";
@@ -31,7 +32,7 @@ const NavContainer = styled.div`
 
 const StyledName = styled.div`
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: ${(props) => props.theme.text};
   cursor: pointer;
 
@@ -111,7 +112,30 @@ const CloseButton = styled.div`
   right: 2rem;
   cursor: pointer;
   color: ${(props) => props.theme.text};
-  font-size: 1.5rem;
+  font-size: 2.5rem;
+`;
+
+const MobileFooter = styled.div`
+  position: absolute;
+  bottom: 3rem;
+  width: 100%;
+  text-align: center;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.75rem;
+  color: ${(props) => props.theme.lightText};
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  a {
+    color: ${(props) => props.theme.text};
+    font-weight: 700;
+  }
+`;
+
+const HamburgerIcon = styled(HiMenu)`
+  font-size: 2rem;
+  color: ${(props) => props.theme.text};
 `;
 
 const Navbar = ({ isOpen, setIsOpen, theme, setTheme }) => {
@@ -145,16 +169,11 @@ const Navbar = ({ isOpen, setIsOpen, theme, setTheme }) => {
             {theme === "lightTheme" ? <MoonSvg /> : <SunSvg />}
           </ThemeButton>
           <LazyMotion features={domAnimation}>
-            <m.div onClick={() => setIsOpen(true)}>
-              <img
-                src={
-                  theme === "darkTheme"
-                    ? "images/hamburgerDark.png"
-                    : "images/hamburgerLight.png"
-                }
-                alt="menu"
-                width="24"
-              />
+            <m.div
+              onClick={() => setIsOpen(true)}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <HamburgerIcon />
             </m.div>
           </LazyMotion>
         </HamburgerBtn>
@@ -174,6 +193,19 @@ const Navbar = ({ isOpen, setIsOpen, theme, setTheme }) => {
                 <NavLink navLinkId={navLinkId} scrollToId={scrollToId} />
               </div>
             ))}
+            <MobileFooter>
+              <p>
+                Design & Developed by{" "}
+                <a
+                  href="https://github.com/Aniket0723"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  ANIKET0723
+                </a>
+              </p>
+              <p>© 2026. All rights reserved.</p>
+            </MobileFooter>
           </MobileMenu>
         </LazyMotion>
       )}

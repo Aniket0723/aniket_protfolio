@@ -73,7 +73,7 @@ const Headline = styled.h1`
 `;
 
 const SubHeadline = styled.p`
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   color: ${(props) => props.theme.secondaryText};
   max-width: 600px;
   line-height: 1.6;
