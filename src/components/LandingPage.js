@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components/macro";
 import { useNav } from "../hooks/useNav";
 import { Fade } from "react-awesome-reveal";
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaEnvelope,
+  FaEye,
+} from "react-icons/fa";
 import {
   SiReact,
   SiNextdotjs,
@@ -20,10 +26,71 @@ const StyledLandingPage = styled.section`
   justify-content: center;
   align-items: center;
   padding: 4rem 1rem;
+  position: relative;
 
   @media (max-width: 768px) {
     padding: 2rem 1.25rem;
     min-height: auto;
+  }
+`;
+
+const VisitorCounter = styled.div`
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: ${(props) => props.theme.cardBg};
+  border: 1px solid ${(props) => props.theme.border};
+  border-radius: 8px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.85rem;
+  color: ${(props) => props.theme.secondaryText};
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  svg {
+    color: ${(props) => props.theme.text};
+    font-size: 1rem;
+  }
+
+  .visitor-text {
+    color: ${(props) => props.theme.lightText};
+  }
+
+  .visitor-number {
+    color: ${(props) => props.theme.text};
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+
+    svg {
+      font-size: 0.9rem;
+    }
+
+    .visitor-number {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    text-align: center;
   }
 `;
 
@@ -164,9 +231,44 @@ const SocialLinks = styled.div`
 
 const LandingPage = () => {
   const landingPageRef = useNav("Home");
+  const [visitorCount, setVisitorCount] = useState(null);
+
+  useEffect(() => {
+    // Using CountAPI - a free visitor counter service
+    const fetchVisitorCount = async () => {
+      try {
+        const response = await fetch(
+          "https://api.countapi.xyz/hit/aniket-portfolio-2026/visits",
+        );
+        const data = await response.json();
+        setVisitorCount(data.value);
+      } catch (error) {
+        console.error("Failed to fetch visitor count:", error);
+        // Fallback to localStorage for demo purposes
+        const localCount = localStorage.getItem("visitorCount") || "1";
+        const newCount = parseInt(localCount) + 1;
+        localStorage.setItem("visitorCount", newCount.toString());
+        setVisitorCount(newCount);
+      }
+    };
+
+    fetchVisitorCount();
+  }, []);
+
+  const formatNumber = (num) => {
+    if (!num) return "...";
+    return num.toLocaleString();
+  };
 
   return (
     <StyledLandingPage ref={landingPageRef} id="landingContainer">
+      <VisitorCounter>
+        <FaEye />
+        <span className="visitor-text">You are the</span>
+        <span className="visitor-number">{formatNumber(visitorCount)}</span>
+        <span className="visitor-text">visitor</span>
+      </VisitorCounter>
+
       <HeroContent>
         <Fade direction="up" cascade damping={0.1} triggerOnce>
           <AvatarWrapper>
