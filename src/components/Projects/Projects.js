@@ -144,16 +144,6 @@ const GithubBadge = styled.a`
   }
 `;
 
-const TechStackBadges = styled.div`
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  max-width: calc(100% - 16px);
-`;
-
 const ProjectContent = styled.div`
   padding: 1.5rem;
   display: flex;
@@ -184,21 +174,6 @@ const ProjectTitleLink = styled.a`
 
   @media (max-width: 768px) {
     font-size: 1.2rem;
-  }
-`;
-
-const ProjectLinks = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  a {
-    font-size: 1.1rem;
-    color: ${(props) => props.theme.lightText};
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: ${(props) => props.theme.text};
-    }
   }
 `;
 
