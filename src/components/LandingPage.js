@@ -325,14 +325,6 @@ const LandingPage = () => {
             >
               <FaLinkedin />
             </a>
-            <a
-              href="https://twitter.com/yourusername"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Twitter"
-            >
-              <FaTwitter />
-            </a>
             <a href="mailto:anunagrale77@gmail.com" aria-label="Email">
               <FaEnvelope />
             </a>
