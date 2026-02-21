@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 const LandingPage = React.lazy(() => import(".//LandingPage"));
+const VisitorCounter = React.lazy(() => import("./VisitorCounter"));
 const Projects = React.lazy(() => import("./Projects/Projects"));
 const Contact = React.lazy(() => import("./Contact"));
 const AboutMe = React.lazy(() => import("./AboutMe"));
@@ -16,6 +17,7 @@ const Main = ({ theme, isOpen }) => {
     >
       <Suspense fallback={<div> </div>}>
         <LandingPage theme={theme} />
+        <VisitorCounter />
         <AboutMe theme={theme} />
         <Projects theme={theme} />
         <Contact />
