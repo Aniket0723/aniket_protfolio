@@ -74,7 +74,13 @@ const Headline = styled.h1`
   white-space: nowrap;
 
   @media (max-width: 768px) {
-    font-size: clamp(1.5rem, 8vw, 2rem);
+    font-size: clamp(1.3rem, 7vw, 1.8rem);
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  @media (max-width: 400px) {
+    font-size: 1.5rem;
   }
 
   span {
