@@ -91,7 +91,7 @@ const Role = styled.h3`
   color: ${(props) => props.theme.text};
 
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 `;
 
@@ -99,6 +99,10 @@ const CompanyName = styled.p`
   font-size: 1rem;
   color: ${(props) => props.theme.secondaryText};
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
 `;
 
 const DurationText = styled.span`
@@ -130,6 +134,11 @@ const ExperienceItem = styled.li`
     left: 0;
     color: ${(props) => props.theme.text};
   }
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
 `;
 
 const RoleBadge = styled.span`
@@ -143,6 +152,13 @@ const RoleBadge = styled.span`
   font-weight: 600;
   white-space: nowrap;
   margin: 0 0.25rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    display: inline-block;
+    margin: 0.1rem 0.2rem;
+  }
 `;
 
 const SkillsSection = styled.div`
@@ -150,6 +166,10 @@ const SkillsSection = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 1.2rem;
+  }
 
   @media (max-width: 500px) {
     grid-template-columns: 1fr;
@@ -166,6 +186,10 @@ const SkillList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+
+  @media (max-width: 768px) {
+    gap: 0.6rem;
+  }
 `;
 
 const SkillBadge = styled.span`
@@ -189,6 +213,16 @@ const SkillBadge = styled.span`
 
   svg {
     font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.85rem;
+    gap: 0.4rem;
+
+    svg {
+      font-size: 1rem;
+    }
   }
 `;
 

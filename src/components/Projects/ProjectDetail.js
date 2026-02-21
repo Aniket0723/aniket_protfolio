@@ -85,6 +85,13 @@ const ImageTechStack = styled.div`
   gap: 0.5rem;
   flex-wrap: wrap;
   max-width: calc(100% - 24px);
+
+  @media (max-width: 768px) {
+    bottom: 8px;
+    left: 8px;
+    gap: 0.4rem;
+    max-width: calc(100% - 16px);
+  }
 `;
 
 const ImageTechBadge = styled.div`
@@ -133,6 +140,10 @@ const ProjectSubject = styled.h2`
   font-weight: 500;
   color: ${(props) => props.theme.secondaryText};
   margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const ProjectMeta = styled.div`
@@ -273,6 +284,11 @@ const TeamSection = styled.div`
   background: ${(props) => props.theme.cardBg};
   border: 1px solid ${(props) => props.theme.border};
   border-radius: 8px;
+
+  @media (max-width: 768px) {
+    padding: 1.2rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const TeamTitle = styled.h3`
@@ -281,6 +297,10 @@ const TeamTitle = styled.h3`
   font-weight: 700;
   margin-bottom: 1rem;
   color: ${(props) => props.theme.text};
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const TeamMembers = styled.div`
@@ -312,6 +332,15 @@ const TeamMember = styled.a`
     border-color: #0077b5;
     box-shadow: 0 4px 8px rgba(0, 119, 181, 0.2);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+
+    svg {
+      font-size: 1.1rem;
+    }
+  }
 `;
 
 const Section = styled.section`
@@ -329,12 +358,22 @@ const SectionTitle = styled.h3`
   text-decoration-color: ${(props) => props.theme.secondaryText};
   text-decoration-thickness: 2px;
   text-underline-offset: 8px;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const SectionContent = styled.div`
   color: ${(props) => props.theme.secondaryText};
   line-height: 1.8;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
 
   p {
     margin-bottom: 1rem;
@@ -346,10 +385,18 @@ const SectionContent = styled.div`
     margin-bottom: 1rem;
     list-style: none;
 
+    @media (max-width: 768px) {
+      margin-left: 1rem;
+    }
+
     li {
       margin-bottom: 0.5rem;
       position: relative;
       padding-left: 1.5rem;
+
+      @media (max-width: 768px) {
+        padding-left: 1.2rem;
+      }
 
       &::before {
         content: "•";

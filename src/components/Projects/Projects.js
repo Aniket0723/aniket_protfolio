@@ -120,6 +120,11 @@ const DateBadge = styled.div`
   font-family: "Roboto Mono", monospace;
   letter-spacing: 0.5px;
   backdrop-filter: blur(4px);
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.6rem;
+  }
 `;
 
 const GithubBadge = styled.a`
@@ -141,6 +146,11 @@ const GithubBadge = styled.a`
   &:hover {
     background: rgba(0, 0, 0, 0.9);
     transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    padding: 0.45rem;
   }
 `;
 
@@ -183,6 +193,11 @@ const ProjectDescription = styled.p`
   color: ${(props) => props.theme.secondaryText};
   margin-bottom: 1.5rem;
   flex-grow: 1;
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
 `;
 
 const ProjectFooter = styled.div`
@@ -215,6 +230,10 @@ const TechIcon = styled.span`
     transform: translateY(-2px);
     filter: brightness(1.2);
   }
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const ViewProject = styled.a`
@@ -233,6 +252,10 @@ const ViewProject = styled.a`
 
   &:hover svg {
     transform: translateX(3px);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
   }
 `;
 
