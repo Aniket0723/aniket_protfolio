@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import { FeaturedProjectsList } from "../assets/projects";
@@ -65,15 +65,115 @@ const ProjectImageWrapper = styled.div`
   margin-bottom: 2rem;
 `;
 
+const GalleryContainer = styled.div`
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid ${(props) => props.theme.border};
+`;
+
+const GallerySlider = styled.div`
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-${(props) => props.currentSlide * 100}%);
+`;
+
+const GallerySlide = styled.div`
+  min-width: 100%;
+  position: relative;
+`;
+
 const ProjectImage = styled.img`
   width: 100%;
   height: 400px;
   object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid ${(props) => props.theme.border};
+  display: block;
 
   @media (max-width: 768px) {
     height: 250px;
+  }
+`;
+
+const NavButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  &.prev {
+    left: 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  &.next {
+    right: 0;
+    border-radius: 4px 0 0 4px;
+  }
+
+  svg {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+
+    svg {
+      font-size: 1.2rem;
+    }
+  }
+`;
+
+const DotsContainer = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+
+  @media (max-width: 768px) {
+    bottom: 0.75rem;
+    right: 0.75rem;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+  }
+`;
+
+const Dot = styled.button`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: ${(props) => (props.active ? "white" : "transparent")};
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  @media (max-width: 768px) {
+    width: 8px;
+    height: 8px;
   }
 `;
 
@@ -113,8 +213,9 @@ const ImageTechBadge = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 0.75rem;
-    padding: 0.4rem 0.6rem;
+    font-size: 0;
+    padding: 0.4rem;
+    gap: 0;
 
     svg {
       font-size: 1rem;
@@ -214,7 +315,7 @@ const Links = styled.div`
   right: 12px;
   display: flex;
   gap: 0.5rem;
-  z-index: 2;
+  z-index: 11;
 
   a {
     display: flex;
@@ -487,10 +588,40 @@ const ProjectDetail = ({ theme }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const project = FeaturedProjectsList.find((p) => p.id === parseInt(id));
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Support both single image (img) and multiple images (images array)
+  const projectImages = project?.images || (project?.img ? [project.img] : []);
+  const hasMultipleImages = projectImages.length > 1;
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  // Auto-play slider every 3 seconds
+  React.useEffect(() => {
+    if (!hasMultipleImages) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % projectImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [hasMultipleImages, projectImages.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % projectImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? projectImages.length - 1 : prev - 1,
+    );
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
 
   if (!project) {
     return (
@@ -513,9 +644,50 @@ const ProjectDetail = ({ theme }) => {
         <ProjectTitle>{project.title}</ProjectTitle>
         <ProjectSubject>{project.subject}</ProjectSubject>
 
-        {project.img && (
+        {projectImages.length > 0 && (
           <ProjectImageWrapper>
-            <ProjectImage src={project.img} alt={project.title} />
+            <GalleryContainer>
+              <GallerySlider currentSlide={currentSlide}>
+                {projectImages.map((image, index) => (
+                  <GallerySlide key={index}>
+                    <ProjectImage
+                      src={image}
+                      alt={`${project.title} - ${index + 1}`}
+                    />
+                    {index === currentSlide &&
+                      project.languages &&
+                      project.languages.length > 0 && (
+                        <ImageTechStack>
+                          {project.languages.slice(0, 5).map((lang) => (
+                            <ImageTechBadge
+                              key={lang}
+                              color={getTechColor(lang)}
+                            >
+                              {getTechIcon(lang)}
+                              {lang}
+                            </ImageTechBadge>
+                          ))}
+                        </ImageTechStack>
+                      )}
+                  </GallerySlide>
+                ))}
+              </GallerySlider>
+
+              {hasMultipleImages && (
+                <>
+                  <DotsContainer>
+                    {projectImages.map((_, index) => (
+                      <Dot
+                        key={index}
+                        active={index === currentSlide}
+                        onClick={() => goToSlide(index)}
+                      />
+                    ))}
+                  </DotsContainer>
+                </>
+              )}
+            </GalleryContainer>
+
             <Links>
               {project.live && (
                 <a
@@ -538,16 +710,6 @@ const ProjectDetail = ({ theme }) => {
                 </a>
               )}
             </Links>
-            {project.languages && project.languages.length > 0 && (
-              <ImageTechStack>
-                {project.languages.slice(0, 5).map((lang) => (
-                  <ImageTechBadge key={lang} color={getTechColor(lang)}>
-                    {getTechIcon(lang)}
-                    {lang}
-                  </ImageTechBadge>
-                ))}
-              </ImageTechStack>
-            )}
           </ProjectImageWrapper>
         )}
 

@@ -1,6 +1,85 @@
 export const FeaturedProjectsList = [
   {
     id: 1,
+    title: "Customer Management System",
+    subject: "Full-Stack Customer & Transaction Tracker",
+    description:
+      "Production customer management for RTO services. Real-time transaction tracking, service management, and analytics dashboard.",
+    overview:
+      "<p>A comprehensive customer management solution designed specifically for RTO (Regional Transport Office) services business to streamline customer tracking, transaction management, and service operations. Built with modern tech stack including Next.js 14, TypeScript, and Neon PostgreSQL, this system manages daily operations and provides real-time business insights.</p>",
+    languages: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Neon PostgreSQL",
+      "NextAuth.js",
+    ],
+    images: [
+      "/images/cms1.png",
+      "/images/cms2.png",
+      "/images/cms3.png",
+      "/images/cms4.png",
+      "/images/cms5.png",
+    ],
+    live: "https://customer-management-sytsem.vercel.app/dashboard/",
+    github: "https://github.com/Aniket0723/customer-management-system",
+    startMonth: "Aug 24",
+    endMonth: "Feb 26",
+    role: "Full Stack",
+    team: "Duo",
+    teamMembers: [
+      {
+        name: "Ashutosh Nagrale",
+        linkedin: "https://www.linkedin.com/in/ashutosh-nagrale-62b91026a/",
+      },
+    ],
+    status: "Completed",
+    client: "Gaurav RTO Works And Online Services",
+    whatCanUsersDo: [
+      "Customer Management: Add, edit, and track customer information with phone/WhatsApp integration",
+      "Transaction Processing: Record transactions with multiple services, calculate bills, and track payments",
+      "Service Catalog: Manage preset and custom services with flexible pricing",
+      "Payment Tracking: Monitor advance payments, outstanding balances, and payment status",
+      "Reports & Analytics: Generate PDF reports with transaction summaries and business metrics",
+      "Dashboard Insights: View today's earnings, total customers, and outstanding balances at a glance",
+      "Mobile Optimized: Fully responsive design for on-the-go access",
+      "Search & Filter: Quick customer search and transaction filtering by date/customer",
+    ],
+    whyBuilt:
+      "Built for Gaurav RTO Works And Online Services to replace manual record-keeping with a modern, efficient digital system tailored to their specific business operations.",
+    whyBuiltPoints: [
+      "Need for organized customer database management",
+      "Replace paper-based transaction tracking",
+      "Requirement for quick payment status visibility",
+      "Enable professional PDF report generation for customers",
+      "Streamline service billing and payment calculations",
+      "Mobile-friendly interface for field operations",
+    ],
+    impact: [
+      "Successfully deployed and actively used in production",
+      "Manages daily customer transactions and service operations",
+      "Eliminated manual paper-based record errors",
+      "Improved transaction processing speed and accuracy",
+      "Enhanced customer service with quick data access",
+      "Reduced time spent on billing and reporting by 70%",
+      "Professional PDF reports improve business credibility",
+      "Mobile optimization enables on-site customer management",
+    ],
+    futurePlans: [
+      "WhatsApp integration for automated customer notifications",
+      "Advanced analytics with charts and trends",
+      "Bulk transaction import/export",
+      "Customer payment history timeline",
+      "SMS reminders for outstanding payments",
+      "Multi-user support with role-based access",
+      "Backup and restore functionality",
+      "Invoice customization options",
+      "Integration with accounting software",
+    ],
+  },
+  {
+    id: 2,
     title: "Inventory Management System",
     subject: "Full-Stack Inventory & Sales Tracker",
     description:
@@ -15,7 +94,13 @@ export const FeaturedProjectsList = [
       "Neon PostgreSQL",
       "NextAuth.js",
     ],
-    img: "/images/ims.png",
+    images: [
+      "/images/ims1.png",
+      "/images/ims2.png",
+      "/images/ims3.png",
+      "/images/ims4.png",
+      "/images/ims5.png",
+    ],
     live: "https://inventory-management-system-sable-five.vercel.app/dashboard",
     github: "https://github.com/Aniket0723/Inventory_management_system",
     startMonth: "Aug 24",
@@ -67,7 +152,7 @@ export const FeaturedProjectsList = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     title: "SnapChef",
     subject: "AI-Powered Recipe Generator",
     description:
@@ -114,7 +199,7 @@ export const FeaturedProjectsList = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: "E-Commerce Store",
     subject: "Redux State Management",
     description:
@@ -161,7 +246,7 @@ export const FeaturedProjectsList = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     title: "Hotel Booking",
     subject: "Full-Stack Booking Platform",
     description:
@@ -210,7 +295,7 @@ export const FeaturedProjectsList = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     title: "YOUTV",
     subject: "Movie Review Web-App",
     description:

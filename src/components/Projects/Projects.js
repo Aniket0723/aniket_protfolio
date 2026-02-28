@@ -315,67 +315,72 @@ const Projects = () => {
     <StyledProjectsSection id="projectsContainer" ref={projectsRef}>
       <SectionTitle>Featured Projects</SectionTitle>
       <ProjectGrid>
-        {FeaturedProjectsList.map((project) => (
-          <ProjectCard
-            key={project.id}
-            onClick={() => handleProjectClick(project.id)}
-          >
-            <ProjectImageContainer>
-              {project.img && (
-                <StyledImage src={project.img} alt={project.title} />
-              )}
-              <GithubBadge
-                href={project.github}
-                target="_blank"
-                rel="noreferrer"
-                title="Source Code"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <FaGithub />
-              </GithubBadge>
-              <DateBadge>
-                {project.startMonth} - {project.endMonth} {project.year}
-              </DateBadge>
-            </ProjectImageContainer>
+        {FeaturedProjectsList.map((project) => {
+          // Get the first image from images array or use img field
+          const projectImage = project.images?.[0] || project.img;
 
-            <ProjectContent>
-              <ProjectHeader>
-                <ProjectTitleLink
-                  href={project.live}
+          return (
+            <ProjectCard
+              key={project.id}
+              onClick={() => handleProjectClick(project.id)}
+            >
+              <ProjectImageContainer>
+                {projectImage && (
+                  <StyledImage src={projectImage} alt={project.title} />
+                )}
+                <GithubBadge
+                  href={project.github}
                   target="_blank"
                   rel="noreferrer"
+                  title="Source Code"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {project.title}
-                </ProjectTitleLink>
-              </ProjectHeader>
+                  <FaGithub />
+                </GithubBadge>
+                <DateBadge>
+                  {project.startMonth} - {project.endMonth} {project.year}
+                </DateBadge>
+              </ProjectImageContainer>
 
-              <ProjectDescription>{project.description}</ProjectDescription>
+              <ProjectContent>
+                <ProjectHeader>
+                  <ProjectTitleLink
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {project.title}
+                  </ProjectTitleLink>
+                </ProjectHeader>
 
-              <ProjectFooter>
-                <TechStack>
-                  {project.languages.slice(0, 4).map((lang) => (
-                    <TechIcon
-                      key={lang}
-                      title={lang}
-                      color={getTechColor(lang)}
-                    >
-                      {getTechIcon(lang)}
-                    </TechIcon>
-                  ))}
-                </TechStack>
-                <ViewProject
-                  href={project.live}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  View <FaExternalLinkAlt />
-                </ViewProject>
-              </ProjectFooter>
-            </ProjectContent>
-          </ProjectCard>
-        ))}
+                <ProjectDescription>{project.description}</ProjectDescription>
+
+                <ProjectFooter>
+                  <TechStack>
+                    {project.languages.slice(0, 4).map((lang) => (
+                      <TechIcon
+                        key={lang}
+                        title={lang}
+                        color={getTechColor(lang)}
+                      >
+                        {getTechIcon(lang)}
+                      </TechIcon>
+                    ))}
+                  </TechStack>
+                  <ViewProject
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    View <FaExternalLinkAlt />
+                  </ViewProject>
+                </ProjectFooter>
+              </ProjectContent>
+            </ProjectCard>
+          );
+        })}
       </ProjectGrid>
     </StyledProjectsSection>
   );
