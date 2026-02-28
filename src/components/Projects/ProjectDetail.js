@@ -95,48 +95,6 @@ const ProjectImage = styled.img`
   }
 `;
 
-const NavButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  padding: 1rem;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.8);
-  }
-
-  &.prev {
-    left: 0;
-    border-radius: 0 4px 4px 0;
-  }
-
-  &.next {
-    right: 0;
-    border-radius: 4px 0 0 4px;
-  }
-
-  svg {
-    font-size: 1.5rem;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0.75rem;
-
-    svg {
-      font-size: 1.2rem;
-    }
-  }
-`;
-
 const DotsContainer = styled.div`
   position: absolute;
   bottom: 1rem;
@@ -608,16 +566,6 @@ const ProjectDetail = ({ theme }) => {
 
     return () => clearInterval(interval);
   }, [hasMultipleImages, projectImages.length]);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % projectImages.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? projectImages.length - 1 : prev - 1,
-    );
-  };
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
