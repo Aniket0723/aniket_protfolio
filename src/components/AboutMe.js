@@ -331,7 +331,7 @@ const AboutMe = () => {
               <SectionTitle>About Me</SectionTitle>
               <ExperienceList>
                 <ExperienceItem>
-                  Frontend / React.js Developer with 3+ years of experience
+                  Frontend React.js Developer with 3+ years of experience
                   building scalable, high-performance web applications using
                   React.js, Next.js, and modern JavaScript.
                 </ExperienceItem>
@@ -344,7 +344,7 @@ const AboutMe = () => {
                 </ExperienceItem>
                 <ExperienceItem>
                   Currently seeking{" "}
-                  <RoleBadge>Frontend / React Developer</RoleBadge> roles in
+                  <RoleBadge>Frontend React Developer</RoleBadge> roles in
                   product-driven environments where I can contribute to building
                   impactful, user-centric applications and grow as a product
                   engineer.

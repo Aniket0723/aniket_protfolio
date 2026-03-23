@@ -179,10 +179,11 @@ const LandingPage = () => {
           </Headline>
 
           <SubHeadline>
-            Frontend Developer with hands-on experience in building responsive
-            applications using React.js, JavaScript, and modern UI libraries.
-            Skilled in refactoring legacy code, integrating REST APIs, and
-            optimizing performance with strong problem-solving skills.
+            Frontend React.js Developer with 3+ years of experience building
+            scalable, high-performance web applications. Experienced in CRM and
+            Inventory Management Systems with dynamic dashboards, complex UI
+            workflows, and a strong focus on performance optimization and
+            reusable component design.
           </SubHeadline>
 
           <TechStack>
