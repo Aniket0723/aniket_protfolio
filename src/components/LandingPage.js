@@ -223,7 +223,7 @@ const LandingPage = () => {
             >
               <FaLinkedin />
             </a>
-            <a href="mailto:anunagrale77@gmail.com" aria-label="Email">
+            <a href="mailto:aniketnagrale2307@gmail.com" aria-label="Email">
               <FaEnvelope />
             </a>
           </SocialLinks>

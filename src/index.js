@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "styled-components/macro";
 import GlobalStyles from "./globalStyles";
@@ -8,7 +8,21 @@ import ProjectDetail from "./components/Projects/ProjectDetail";
 import Navbar from "./components/Nav/Navbar";
 import NavProvider from "./context/NavContext";
 import Footer from "./components/Footer";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Disable browser scroll restoration
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const RootApp = () => {
   const [theme, setTheme] = useState("darkTheme");
@@ -21,6 +35,7 @@ const RootApp = () => {
       <GlobalStyles />
       <BrowserRouter>
         <NavProvider>
+          <ScrollToTop />
           <Navbar
             isOpen={isOpen}
             setIsOpen={setIsOpen}
@@ -47,3 +62,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root"),
 );
+
+// Disable browser scroll restoration globally
+if ("scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}

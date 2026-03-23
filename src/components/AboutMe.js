@@ -2,8 +2,13 @@ import React from "react";
 import styled from "styled-components/macro";
 import { useNav } from "../hooks/useNav";
 import { Fade } from "react-awesome-reveal";
-import { FaReact, FaNodeJs, FaGitAlt, FaDatabase } from "react-icons/fa";
-import { AiOutlineApi } from "react-icons/ai";
+import {
+  FaReact,
+  FaNodeJs,
+  FaGitAlt,
+  FaDatabase,
+  FaPlug,
+} from "react-icons/fa";
 import {
   SiJavascript,
   SiTypescript,
@@ -83,6 +88,52 @@ const TimelineItem = styled.div`
   @media (max-width: 768px) {
     padding-left: 1rem;
   }
+`;
+
+const TimelineHeader = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+`;
+
+const CompanyLogo = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: contain;
+  border: 1px solid white;
+  outline: 1px solid white;
+  outline-offset: 3px;
+  background: white;
+  padding: 5px;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
+`;
+
+const CompanyLogoActive = styled(CompanyLogo)`
+  animation: glowPulse 2s ease-in-out infinite;
+
+  @keyframes glowPulse {
+    0%,
+    100% {
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.3);
+      outline-color: rgba(255, 255, 255, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.75);
+      outline-color: rgba(255, 255, 255, 1);
+    }
+  }
+`;
+
+const TimelineInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 `;
 
 const Role = styled.h3`
@@ -280,24 +331,28 @@ const AboutMe = () => {
               <SectionTitle>About Me</SectionTitle>
               <ExperienceList>
                 <ExperienceItem>
-                  Frontend / Junior Full-Stack Developer with 6 months of
-                  professional experience and strong foundation in React.js,
-                  JavaScript, and modern web technologies.
+                  Frontend / React.js Developer with 3+ years of experience
+                  building scalable, high-performance web applications using
+                  React.js, Next.js, and modern JavaScript.
                 </ExperienceItem>
                 <ExperienceItem>
-                  After exploring government examination opportunities, I gained
-                  clarity that my true passion and alignment lies in technology
-                  and innovation.
+                  Experienced in developing CRM and Inventory Management Systems
+                  with dynamic dashboards, complex UI workflows, and data-driven
+                  architectures. Strong focus on performance optimization,
+                  reusable component design, and building scalable frontend
+                  systems.
                 </ExperienceItem>
                 <ExperienceItem>
-                  Currently seeking
-                  <RoleBadge>Associate / Junior Frontend Developer</RoleBadge>
-                  roles where I can contribute my skills, collaborate with
-                  talented teams, and grow while building impactful products.
+                  Currently seeking{" "}
+                  <RoleBadge>Frontend / React Developer</RoleBadge> roles in
+                  product-driven environments where I can contribute to building
+                  impactful, user-centric applications and grow as a product
+                  engineer.
                 </ExperienceItem>
                 <ExperienceItem>
-                  Committed to writing clean, maintainable code and continuously
-                  learning new technologies to solve real-world problems.
+                  Passionate about clean code, problem-solving, and continuously
+                  improving to deliver efficient, maintainable, and high-quality
+                  software.
                 </ExperienceItem>
               </ExperienceList>
             </SectionHeader>
@@ -306,54 +361,84 @@ const AboutMe = () => {
               <SectionTitle>Work Experience</SectionTitle>
               <Timeline>
                 <TimelineItem>
-                  <Role>Freelance Web Developer</Role>
-                  <CompanyName>Self-Employed</CompanyName>
-                  <DurationText>Jan 2024 - Nov 2025</DurationText>
+                  <TimelineHeader>
+                    <CompanyLogoActive
+                      src="images/spellor-logic-soft-logo.jpeg"
+                      alt="Spellor Logic Soft"
+                    />
+                    <TimelineInfo>
+                      <Role>Software Engineer</Role>
+                      <CompanyName>
+                        Spellor Logic Soft Pvt Ltd, Hyderabad
+                      </CompanyName>
+                      <DurationText>Jan 2024 - Present</DurationText>
+                    </TimelineInfo>
+                  </TimelineHeader>
                   <ExperienceList>
                     <ExperienceItem>
-                      Prepared for government examinations while maintaining
-                      active development, gaining valuable lessons in patience,
-                      consistency, and discipline.
+                      Developed scalable and responsive CRM web applications
+                      using React.js, improving user workflows and data
+                      management efficiency.
                     </ExperienceItem>
                     <ExperienceItem>
-                      Developed and deployed production-ready inventory
-                      management system for bottle cap manufacturing company
-                      using Next.js, TypeScript, and PostgreSQL - currently in
-                      active use managing daily operations.
+                      Built reusable UI components, custom hooks, and modular
+                      architecture to enhance maintainability and development
+                      speed.
                     </ExperienceItem>
                     <ExperienceItem>
-                      Built customer management and order tracking systems for
-                      local businesses using React, Node.js, Express, and
-                      MongoDB.
+                      Designed dynamic dashboards with data visualization and
+                      role-based access control for better business insights.
                     </ExperienceItem>
                     <ExperienceItem>
-                      Collaborated directly with business owners, gaining
-                      insights into real-world requirements and client
-                      communication.
+                      Integrated REST APIs and implemented JWT authentication
+                      for secure, real-time frontend–backend communication.
+                    </ExperienceItem>
+                    <ExperienceItem>
+                      Optimized performance using lazy loading, memoization
+                      (React.memo, useMemo), and code splitting.
+                    </ExperienceItem>
+                    <ExperienceItem>
+                      Contributed to backend development (~20%) using Node.js
+                      and Express.js, while ensuring responsive, cross-browser
+                      compatible UI.
                     </ExperienceItem>
                   </ExperienceList>
                 </TimelineItem>
 
                 <TimelineItem>
-                  <Role>Web Developer</Role>
-                  <CompanyName>THE WORKS, Mumbai</CompanyName>
-                  <DurationText>July 2023 - Dec 2023</DurationText>
+                  <TimelineHeader>
+                    <CompanyLogo
+                      src="images/the-works-logo.png"
+                      alt="THE WORKS"
+                    />
+                    <TimelineInfo>
+                      <Role>Web Developer</Role>
+                      <CompanyName>THE WORKS, Mumbai</CompanyName>
+                      <DurationText>July 2023 - Dec 2023</DurationText>
+                    </TimelineInfo>
+                  </TimelineHeader>
                   <ExperienceList>
                     <ExperienceItem>
-                      Developed responsive, multi-page web applications with
-                      optimized UI to improve performance and user experience.
+                      Developed responsive, multi-page web applications using
+                      HTML, CSS, and JavaScript (ES6+), ensuring cross-browser
+                      compatibility and improved UI/UX.
                     </ExperienceItem>
                     <ExperienceItem>
-                      Built reusable React components, custom hooks, and
-                      integrated REST APIs for scalable frontend solutions.
+                      Built interactive and animated user interfaces using
+                      Vanilla JavaScript and GSAP, enhancing user engagement.
                     </ExperienceItem>
                     <ExperienceItem>
-                      Improved deployment speed through build and CI automation.
+                      Created reusable frontend components and optimized DOM
+                      manipulation and rendering for better performance.
                     </ExperienceItem>
                     <ExperienceItem>
-                      Managed client communication to gather requirements,
-                      ensure timely delivery, and build clean, user-friendly
-                      pages using Shopify and Wix.
+                      Integrated RESTful APIs and utilized React.js for dynamic
+                      data handling and scalable features.
+                    </ExperienceItem>
+                    <ExperienceItem>
+                      Collaborated with clients to gather requirements and
+                      delivered user-friendly web solutions using Shopify and
+                      Wix.
                     </ExperienceItem>
                   </ExperienceList>
                 </TimelineItem>
@@ -449,7 +534,7 @@ const AboutMe = () => {
                       <SiNetlify color="#00C7B7" /> Netlify
                     </SkillBadge>
                     <SkillBadge>
-                      <AiOutlineApi color="#00C7B7" /> REST APIs
+                      <FaPlug color="#00C7B7" /> REST APIs
                     </SkillBadge>
                   </SkillList>
                 </SkillGroup>

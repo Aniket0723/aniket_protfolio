@@ -185,8 +185,8 @@ const Contact = () => {
               <br />
               <br />
               Email me at{" "}
-              <a href="mailto:anunagrale77@gmail.com">
-                anunagrale77@gmail.com
+              <a href="mailto:aniketnagrale2307@gmail.com">
+                aniketnagrale2307@gmail.com
               </a>{" "}
               or find me on{" "}
               <a

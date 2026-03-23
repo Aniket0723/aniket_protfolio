@@ -602,37 +602,31 @@ const ProjectDetail = ({ theme }) => {
                       src={image}
                       alt={`${project.title} - ${index + 1}`}
                     />
-                    {index === currentSlide &&
-                      project.languages &&
-                      project.languages.length > 0 && (
-                        <ImageTechStack>
-                          {project.languages.slice(0, 5).map((lang) => (
-                            <ImageTechBadge
-                              key={lang}
-                              color={getTechColor(lang)}
-                            >
-                              {getTechIcon(lang)}
-                              {lang}
-                            </ImageTechBadge>
-                          ))}
-                        </ImageTechStack>
-                      )}
                   </GallerySlide>
                 ))}
               </GallerySlider>
 
+              {project.languages && project.languages.length > 0 && (
+                <ImageTechStack>
+                  {project.languages.slice(0, 5).map((lang) => (
+                    <ImageTechBadge key={lang} color={getTechColor(lang)}>
+                      {getTechIcon(lang)}
+                      {lang}
+                    </ImageTechBadge>
+                  ))}
+                </ImageTechStack>
+              )}
+
               {hasMultipleImages && (
-                <>
-                  <DotsContainer>
-                    {projectImages.map((_, index) => (
-                      <Dot
-                        key={index}
-                        active={index === currentSlide}
-                        onClick={() => goToSlide(index)}
-                      />
-                    ))}
-                  </DotsContainer>
-                </>
+                <DotsContainer>
+                  {projectImages.map((_, index) => (
+                    <Dot
+                      key={index}
+                      active={index === currentSlide}
+                      onClick={() => goToSlide(index)}
+                    />
+                  ))}
+                </DotsContainer>
               )}
             </GalleryContainer>
 
