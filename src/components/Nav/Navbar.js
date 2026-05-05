@@ -125,7 +125,7 @@ const MobileFooter = styled.div`
   bottom: 3rem;
   width: 100%;
   text-align: center;
-  font-family: "Roboto Mono", monospace;
+  font-family: "Victor Mono", monospace;
   font-size: 0.75rem;
   color: ${(props) => props.theme.lightText};
   display: flex;
@@ -167,8 +167,13 @@ const Navbar = ({ isOpen, setIsOpen, theme, setTheme }) => {
         </StyledName>
 
         <StyledLinks>
-          {navLinks.map(({ navLinkId, scrollToId }, idx) => (
-            <NavLink key={idx} navLinkId={navLinkId} scrollToId={scrollToId} />
+          {navLinks.map(({ navLinkId, scrollToId, path }, idx) => (
+            <NavLink
+              key={idx}
+              navLinkId={navLinkId}
+              scrollToId={scrollToId}
+              path={path}
+            />
           ))}
         </StyledLinks>
 
@@ -202,9 +207,13 @@ const Navbar = ({ isOpen, setIsOpen, theme, setTheme }) => {
             transition={{ type: "spring", damping: 25 }}
           >
             <CloseButton onClick={() => setIsOpen(false)}>×</CloseButton>
-            {navLinks.map(({ navLinkId, scrollToId }, idx) => (
+            {navLinks.map(({ navLinkId, scrollToId, path }, idx) => (
               <div key={idx} onClick={() => setIsOpen(false)}>
-                <NavLink navLinkId={navLinkId} scrollToId={scrollToId} />
+                <NavLink
+                  navLinkId={navLinkId}
+                  scrollToId={scrollToId}
+                  path={path}
+                />
               </div>
             ))}
             <MobileFooter>

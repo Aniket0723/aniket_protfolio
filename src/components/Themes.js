@@ -12,7 +12,6 @@ export const lightTheme = {
   boxShadow: "none",
   buttonColor: "#000000",
   buttonText: "#FFFFFF",
-  moreProjectsCardBackgroundColor: "#FFFFFF",
   themeTransition: themeTransition,
   navbar: {
     body: "#FFFFFF",
@@ -35,7 +34,6 @@ export const darkTheme = {
   boxShadow: "none",
   buttonColor: "#FFFFFF",
   buttonText: "#000000",
-  moreProjectsCardBackgroundColor: "#09090B",
   themeTransition: themeTransition,
   navbar: {
     body: "#000000",

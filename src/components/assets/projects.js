@@ -344,10 +344,3 @@ export const FeaturedProjectsList = [
     ],
   },
 ];
-
-export const BlogsList = [
-  {
-    id: 1,
-    title: "Coming soon stay tuned ",
-  },
-];

@@ -26,7 +26,7 @@ const CounterWrapper = styled.div`
   background: ${(props) => props.theme.cardBg};
   border: 1px solid ${(props) => props.theme.border};
   border-radius: 8px;
-  font-family: "Roboto Mono", monospace;
+  font-family: "Victor Mono", monospace;
   font-size: 0.95rem;
   color: ${(props) => props.theme.secondaryText};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

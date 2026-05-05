@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from "react";
 
-export const NavContext = React.createContext()
+export const NavContext = React.createContext();
 
 const NavProvider = ({ children }) => {
-  const [activeNavLinkId, setActiveNavLinkId] = useState('')
+  const [activeNavLinkId, setActiveNavLinkId] = useState("");
 
-  const providerValue = {
-    activeNavLinkId,
-    setActiveNavLinkId,
-  }
+  const providerValue = useMemo(
+    () => ({ activeNavLinkId, setActiveNavLinkId }),
+    [activeNavLinkId],
+  );
 
   return (
     <NavContext.Provider value={providerValue}>{children}</NavContext.Provider>
-  )
-}
-export default NavProvider
+  );
+};
+
+export default NavProvider;

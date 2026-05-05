@@ -25,29 +25,34 @@ import {
 
 const DetailContainer = styled.div`
   color: ${(props) => props.theme.text};
-  padding: 4rem 1rem;
+  padding: 1.5rem 1rem 4rem;
   max-width: 1000px;
   margin: 0 auto;
   min-height: 100vh;
 
   @media (max-width: 768px) {
-    padding: 2rem 1.25rem;
+    padding: 1rem 1.25rem 2rem;
   }
 `;
 
 const BackButton = styled.button`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   background: ${(props) => props.theme.cardBg};
   border: 1px solid ${(props) => props.theme.border};
   color: ${(props) => props.theme.text};
-  padding: 0.75rem 1.5rem;
+  padding: 0.4rem 0.9rem;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 0.8rem;
   font-weight: 600;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   transition: all 0.2s ease;
+
+  svg {
+    font-size: 0.75rem;
+  }
 
   &:hover {
     background: ${(props) => props.theme.border};
@@ -159,14 +164,14 @@ const ImageTechBadge = styled.div`
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(8px);
   color: white;
-  padding: 0.5rem 0.75rem;
+  padding: 0.35rem 0.6rem;
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
   border: 1px solid ${(props) => props.color || "rgba(255, 255, 255, 0.2)"};
 
   svg {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: ${(props) => props.color || "white"};
   }
 
@@ -182,26 +187,26 @@ const ImageTechBadge = styled.div`
 `;
 
 const ProjectTitle = styled.h1`
-  font-family: "Syne", sans-serif;
-  font-size: 2rem;
+  font-family: "Victor Mono", monospace;
+  font-size: 1.5rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 `;
 
 const ProjectSubject = styled.h2`
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: ${(props) => props.theme.secondaryText};
   margin-bottom: 1.5rem;
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 `;
 
@@ -226,7 +231,7 @@ const MetaItem = styled.div`
   text-align: center;
 
   .label {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: ${(props) => props.theme.lightText};
     text-transform: uppercase;
     font-weight: 600;
@@ -235,7 +240,7 @@ const MetaItem = styled.div`
   }
 
   .value {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: ${(props) => props.theme.text};
     font-weight: 600;
 
@@ -246,7 +251,7 @@ const MetaItem = styled.div`
       border-radius: 4px;
       border: 1px solid #4caf50;
       display: inline-block;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       white-space: nowrap;
     }
 
@@ -257,7 +262,7 @@ const MetaItem = styled.div`
       border-radius: 4px;
       border: 1px solid #2196f3;
       display: inline-block;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       white-space: nowrap;
     }
 
@@ -343,22 +348,31 @@ const TeamSection = styled.div`
   background: ${(props) => props.theme.cardBg};
   border: 1px solid ${(props) => props.theme.border};
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
     padding: 1.2rem;
     margin-bottom: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
 `;
 
 const TeamTitle = styled.h3`
-  font-family: "Syne", sans-serif;
-  font-size: 1.2rem;
+  font-family: "Victor Mono", monospace;
+  font-size: 1rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   color: ${(props) => props.theme.text};
+  white-space: nowrap;
 
   @media (max-width: 768px) {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
   }
 `;
 
@@ -371,34 +385,26 @@ const TeamMembers = styled.div`
 const TeamMember = styled.a`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
   background: ${(props) => props.theme.bg};
   border: 1px solid ${(props) => props.theme.border};
   border-radius: 6px;
   color: ${(props) => props.theme.text};
   text-decoration: none;
+  font-size: 0.8rem;
   font-weight: 600;
   transition: all 0.2s ease;
 
   svg {
     color: #0077b5;
-    font-size: 1.2rem;
+    font-size: 0.95rem;
   }
 
   &:hover {
     transform: translateY(-2px);
     border-color: #0077b5;
     box-shadow: 0 4px 8px rgba(0, 119, 181, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-
-    svg {
-      font-size: 1.1rem;
-    }
   }
 `;
 
@@ -407,8 +413,8 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h3`
-  font-family: "Syne", sans-serif;
-  font-size: 1.4rem;
+  font-family: "Victor Mono", monospace;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
@@ -419,7 +425,7 @@ const SectionTitle = styled.h3`
   text-underline-offset: 8px;
 
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
   }
 `;
@@ -427,10 +433,10 @@ const SectionTitle = styled.h3`
 const SectionContent = styled.div`
   color: ${(props) => props.theme.secondaryText};
   line-height: 1.8;
-  font-size: 1rem;
+  font-size: 0.875rem;
 
   @media (max-width: 768px) {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     line-height: 1.7;
   }
 
@@ -584,7 +590,24 @@ const ProjectDetail = ({ theme }) => {
 
   return (
     <DetailContainer>
-      <BackButton onClick={() => navigate("/#projectsContainer")}>
+      <BackButton
+        onClick={() => {
+          navigate("/");
+          setTimeout(() => {
+            const el = document.getElementById("projectsContainer");
+            if (el) {
+              const navbarHeight =
+                document.querySelector("nav")?.offsetHeight || 65;
+              const top =
+                el.getBoundingClientRect().top +
+                window.scrollY -
+                navbarHeight -
+                24;
+              window.scrollTo({ top, behavior: "smooth" });
+            }
+          }, 150);
+        }}
+      >
         <FaArrowLeft /> Back to Projects
       </BackButton>
 
@@ -601,6 +624,9 @@ const ProjectDetail = ({ theme }) => {
                     <ProjectImage
                       src={image}
                       alt={`${project.title} - ${index + 1}`}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      width="1000"
+                      height="400"
                     />
                   </GallerySlide>
                 ))}

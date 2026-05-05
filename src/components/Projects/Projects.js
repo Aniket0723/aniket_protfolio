@@ -2,38 +2,24 @@ import React from "react";
 import styled from "styled-components/macro";
 import { useNav } from "../../hooks/useNav";
 import { FeaturedProjectsList } from "../assets/projects";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import {
-  SiReact,
-  SiRedux,
-  SiJavascript,
-  SiTypescript,
-  SiNextdotjs,
-  SiTailwindcss,
-  SiNodedotjs,
-  SiExpress,
-  SiMongodb,
-  SiPostgresql,
-  SiSass,
-  SiCss3,
-} from "react-icons/si";
 
 const StyledProjectsSection = styled.section`
   color: ${(props) => props.theme.text};
-  padding: 0 1rem 6rem;
+  padding: 0 1rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 0 1.25rem 4rem;
+    padding: 0 1.25rem 2rem;
   }
 `;
 
 const SectionTitle = styled.h2`
-  font-family: "Syne", sans-serif;
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-family: "Victor Mono", monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
   margin-bottom: 3rem;
   display: flex;
   align-items: center;
@@ -49,18 +35,19 @@ const SectionTitle = styled.h2`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 1.1rem;
     margin-bottom: 2rem;
   }
 `;
 
 const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(3, 320px);
+  gap: 3rem;
+  justify-content: center;
 
   @media (max-width: 1100px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 320px);
   }
 
   @media (max-width: 768px) {
@@ -103,7 +90,7 @@ const StyledImage = styled.img`
 const ProjectImageContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 180px;
+  height: 110px;
   overflow: hidden;
 `;
 
@@ -113,60 +100,55 @@ const DateBadge = styled.div`
   right: 8px;
   background: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 0.5rem 0.75rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 4px;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 600;
-  font-family: "Roboto Mono", monospace;
+  font-family: "Victor Mono", monospace;
   letter-spacing: 0.5px;
   backdrop-filter: blur(4px);
-
-  @media (max-width: 768px) {
-    font-size: 0.7rem;
-    padding: 0.4rem 0.6rem;
-  }
 `;
 
-const GithubBadge = styled.a`
+const ViewBadge = styled.a`
   position: absolute;
-  top: 8px;
-  left: 8px;
+  bottom: 8px;
+  right: 8px;
   background: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 0.5rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 4px;
-  font-size: 1.2rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  font-family: "Victor Mono", monospace;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.3rem;
   backdrop-filter: blur(4px);
   transition: all 0.2s ease;
   z-index: 2;
 
-  &:hover {
-    background: rgba(0, 0, 0, 0.9);
-    transform: scale(1.1);
+  svg {
+    font-size: 0.55rem;
   }
 
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-    padding: 0.45rem;
+  &:hover {
+    background: rgba(0, 0, 0, 0.9);
   }
 `;
 
 const ProjectContent = styled.div`
-  padding: 1.5rem;
+  padding: 0.75rem;
   display: flex;
   flex-direction: column;
 `;
 
 const ProjectHeader = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
 `;
 
 const ProjectTitleLink = styled.a`
-  font-family: "Syne", sans-serif;
-  font-size: 1.4rem;
+  font-family: "Victor Mono", monospace;
+  font-size: 0.8rem;
   font-weight: 500;
   color: ${(props) => props.theme.text};
   display: flex;
@@ -183,125 +165,17 @@ const ProjectTitleLink = styled.a`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 `;
 
 const ProjectDescription = styled.p`
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.6rem;
+  line-height: 1.4;
   color: ${(props) => props.theme.secondaryText};
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   flex-grow: 1;
-
-  @media (max-width: 768px) {
-    font-size: 0.85rem;
-    line-height: 1.4;
-  }
 `;
-
-const ProjectFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media (max-width: 400px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-`;
-
-const TechStack = styled.div`
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  align-items: center;
-`;
-
-const TechIcon = styled.span`
-  font-size: 1.3rem;
-  color: ${(props) => props.color || props.theme.lightText};
-  display: flex;
-  align-items: center;
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.2);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-  }
-`;
-
-const ViewProject = styled.a`
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: ${(props) => props.theme.text};
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  white-space: nowrap;
-
-  svg {
-    font-size: 0.8rem;
-    transition: transform 0.2s ease;
-  }
-
-  &:hover svg {
-    transform: translateX(3px);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.85rem;
-  }
-`;
-
-const getTechIcon = (techName) => {
-  const iconMap = {
-    React: <SiReact />,
-    "React.js": <SiReact />,
-    Redux: <SiRedux />,
-    "Redux Toolkit": <SiRedux />,
-    JavaScript: <SiJavascript />,
-    TypeScript: <SiTypescript />,
-    "Next.js": <SiNextdotjs />,
-    "Tailwind CSS": <SiTailwindcss />,
-    "Node.js": <SiNodedotjs />,
-    "Express.js": <SiExpress />,
-    MongoDB: <SiMongodb />,
-    PostgreSQL: <SiPostgresql />,
-    "Neon PostgreSQL": <SiPostgresql />,
-    SCSS: <SiSass />,
-    CSS: <SiCss3 />,
-  };
-  return iconMap[techName] || null;
-};
-
-const getTechColor = (techName) => {
-  const colorMap = {
-    React: "#61DAFB",
-    "React.js": "#61DAFB",
-    Redux: "#764ABC",
-    "Redux Toolkit": "#764ABC",
-    JavaScript: "#F7DF1E",
-    TypeScript: "#3178C6",
-    "Next.js": "#FFFFFF",
-    "Tailwind CSS": "#06B6D4",
-    "Node.js": "#339933",
-    "Express.js": "#FFFFFF",
-    MongoDB: "#47A248",
-    PostgreSQL: "#4169E1",
-    "Neon PostgreSQL": "#4169E1",
-    "NextAuth.js": "#FFFFFF",
-    CSS: "#1572B6",
-    SCSS: "#CC6699",
-    "TMDB API": "#01D277",
-  };
-  return colorMap[techName] || "#6B7280";
-};
 
 const Projects = () => {
   const projectsRef = useNav("Projects");
@@ -326,20 +200,25 @@ const Projects = () => {
             >
               <ProjectImageContainer>
                 {projectImage && (
-                  <StyledImage src={projectImage} alt={project.title} />
+                  <StyledImage
+                    src={projectImage}
+                    alt={project.title}
+                    loading="lazy"
+                    width="400"
+                    height="150"
+                  />
                 )}
-                <GithubBadge
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  title="Source Code"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <FaGithub />
-                </GithubBadge>
                 <DateBadge>
                   {project.startMonth} - {project.endMonth} {project.year}
                 </DateBadge>
+                <ViewBadge
+                  href={project.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  View <FaExternalLinkAlt />
+                </ViewBadge>
               </ProjectImageContainer>
 
               <ProjectContent>
@@ -355,28 +234,6 @@ const Projects = () => {
                 </ProjectHeader>
 
                 <ProjectDescription>{project.description}</ProjectDescription>
-
-                <ProjectFooter>
-                  <TechStack>
-                    {project.languages.slice(0, 4).map((lang) => (
-                      <TechIcon
-                        key={lang}
-                        title={lang}
-                        color={getTechColor(lang)}
-                      >
-                        {getTechIcon(lang)}
-                      </TechIcon>
-                    ))}
-                  </TechStack>
-                  <ViewProject
-                    href={project.live}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    View <FaExternalLinkAlt />
-                  </ViewProject>
-                </ProjectFooter>
               </ProjectContent>
             </ProjectCard>
           );

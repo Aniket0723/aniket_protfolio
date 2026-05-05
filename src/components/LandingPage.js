@@ -19,10 +19,10 @@ const StyledLandingPage = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4rem 1rem;
+  padding: 2rem 1rem 4rem;
 
   @media (max-width: 768px) {
-    padding: 2rem 1.25rem;
+    padding: 1rem 1.25rem 2rem;
     min-height: auto;
   }
 `;
@@ -37,8 +37,8 @@ const HeroContent = styled.div`
 `;
 
 const AvatarWrapper = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   margin-bottom: 2rem;
   border-radius: 50%;
   overflow: hidden;
@@ -56,15 +56,15 @@ const AvatarWrapper = styled.div`
 `;
 
 const Greeting = styled.p`
-  font-family: "Roboto Mono", monospace;
+  font-family: "Victor Mono", monospace;
   font-size: 1rem;
   color: ${(props) => props.theme.secondaryText};
   margin-bottom: 1rem;
 `;
 
 const Headline = styled.h1`
-  font-family: "Syne", sans-serif;
-  font-size: clamp(2rem, 6vw, 3rem);
+  font-family: "Victor Mono", monospace;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1.5rem;
@@ -74,13 +74,13 @@ const Headline = styled.h1`
   white-space: nowrap;
 
   @media (max-width: 768px) {
-    font-size: clamp(1.3rem, 7vw, 1.8rem);
+    font-size: clamp(1rem, 4vw, 1.2rem);
     white-space: normal;
     word-break: keep-all;
   }
 
   @media (max-width: 400px) {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 
   span {
@@ -89,14 +89,14 @@ const Headline = styled.h1`
 `;
 
 const SubHeadline = styled.p`
-  font-size: 1.4rem;
+  font-size: 1rem;
   color: ${(props) => props.theme.secondaryText};
   max-width: 800px;
   line-height: 1.6;
   margin-bottom: 2.5rem;
 
   @media (max-width: 768px) {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     margin-bottom: 2rem;
   }
 `;
@@ -170,7 +170,13 @@ const LandingPage = () => {
       <HeroContent>
         <Fade direction="up" cascade damping={0.1} triggerOnce>
           <AvatarWrapper>
-            <img src="images/avatar.png" alt="Aniket Nagrale" />
+            <img
+              src="images/avatar.jpeg"
+              alt="Aniket Nagrale"
+              width="250"
+              height="250"
+              fetchpriority="high"
+            />
           </AvatarWrapper>
 
           <Greeting>Hi there, I&apos;m</Greeting>
@@ -194,7 +200,7 @@ const LandingPage = () => {
               <SiReact style={{ color: "#61DAFB" }} /> React
             </TechCapsule>
             <TechCapsule>
-              <SiNextdotjs /> Next.js
+              <SiNextdotjs style={{ color: "currentColor" }} /> Next.js
             </TechCapsule>
             <TechCapsule>
               <SiTailwindcss style={{ color: "#06B6D4" }} /> Tailwind

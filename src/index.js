@@ -5,6 +5,8 @@ import GlobalStyles from "./globalStyles";
 import { lightTheme, darkTheme } from "./components/Themes";
 import Main from "./components/Main";
 import ProjectDetail from "./components/Projects/ProjectDetail";
+import Learn from "./components/Learn/Learn";
+import BlogPost from "./components/Learn/BlogPost";
 import Navbar from "./components/Nav/Navbar";
 import NavProvider from "./context/NavContext";
 import Footer from "./components/Footer";
@@ -48,6 +50,8 @@ const RootApp = () => {
               path="/project/:id"
               element={<ProjectDetail theme={theme} />}
             />
+            <Route path="/learn" element={<Learn />} />
+            <Route path="/learn/:id" element={<BlogPost />} />
           </Routes>
           <Footer />
         </NavProvider>

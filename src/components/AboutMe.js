@@ -44,9 +44,9 @@ const SectionHeader = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  font-family: "Syne", sans-serif;
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-family: "Victor Mono", monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -62,7 +62,7 @@ const SectionTitle = styled.h2`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 1.1rem;
     gap: 0.5rem;
   }
 `;
@@ -101,8 +101,8 @@ const CompanyLogo = styled.img`
   height: 60px;
   border-radius: 8px;
   object-fit: contain;
-  border: 1px solid white;
-  outline: 1px solid white;
+  border: 1px solid ${(props) => props.theme.border};
+  outline: 1px solid ${(props) => props.theme.border};
   outline-offset: 3px;
   background: white;
   padding: 5px;
@@ -120,12 +120,12 @@ const CompanyLogoActive = styled(CompanyLogo)`
   @keyframes glowPulse {
     0%,
     100% {
-      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.3);
-      outline-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 6px 2px ${(props) => props.theme.secondaryText}44;
+      outline-color: ${(props) => props.theme.secondaryText}88;
     }
     50% {
-      box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.75);
-      outline-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 0 20px 8px ${(props) => props.theme.secondaryText}99;
+      outline-color: ${(props) => props.theme.secondaryText};
     }
   }
 `;
@@ -159,7 +159,7 @@ const CompanyName = styled.p`
 const DurationText = styled.span`
   font-size: 0.85rem;
   color: ${(props) => props.theme.lightText};
-  font-family: "Roboto Mono", monospace;
+  font-family: "Victor Mono", monospace;
   margin-bottom: 0.5rem;
 `;
 
@@ -296,9 +296,9 @@ const Column = styled.div`
 `;
 
 const TechnicalSkillsTitle = styled.h2`
-  font-family: "Syne", sans-serif;
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-family: "Victor Mono", monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -314,7 +314,7 @@ const TechnicalSkillsTitle = styled.h2`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 1.1rem;
     gap: 0.5rem;
   }
 `;
@@ -365,6 +365,9 @@ const AboutMe = () => {
                     <CompanyLogoActive
                       src="images/spellor-logic-soft-logo.jpeg"
                       alt="Spellor Logic Soft"
+                      loading="lazy"
+                      width="60"
+                      height="60"
                     />
                     <TimelineInfo>
                       <Role>Software Engineer</Role>
@@ -410,6 +413,9 @@ const AboutMe = () => {
                     <CompanyLogo
                       src="images/the-works-logo.png"
                       alt="THE WORKS"
+                      loading="lazy"
+                      width="60"
+                      height="60"
                     />
                     <TimelineInfo>
                       <Role>Web Developer</Role>
@@ -479,7 +485,7 @@ const AboutMe = () => {
                       <FaReact color="#61DAFB" /> React
                     </SkillBadge>
                     <SkillBadge>
-                      <SiNextdotjs /> Next.js
+                      <SiNextdotjs color="currentColor" /> Next.js
                     </SkillBadge>
                     <SkillBadge>
                       <SiRedux color="#764ABC" /> Redux
@@ -505,7 +511,7 @@ const AboutMe = () => {
                       <FaNodeJs color="#339933" /> Node
                     </SkillBadge>
                     <SkillBadge>
-                      <SiExpress /> Express
+                      <SiExpress color="currentColor" /> Express
                     </SkillBadge>
                     <SkillBadge>
                       <SiMongodb color="#47A248" /> MongoDB
@@ -528,7 +534,7 @@ const AboutMe = () => {
                       <SiPostman color="#FF6C37" /> Postman
                     </SkillBadge>
                     <SkillBadge>
-                      <SiVercel /> Vercel
+                      <SiVercel color="currentColor" /> Vercel
                     </SkillBadge>
                     <SkillBadge>
                       <SiNetlify color="#00C7B7" /> Netlify

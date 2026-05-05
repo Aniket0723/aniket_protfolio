@@ -33,16 +33,16 @@ const ContactContent = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  font-family: "Syne", sans-serif;
-  font-size: 2.8rem;
-  font-weight: 800;
+  font-family: "Victor Mono", monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 1.1rem;
     text-align: center;
     margin-bottom: 2rem;
   }
@@ -51,7 +51,7 @@ const SectionTitle = styled.h2`
 const ContactInfo = styled.div`
   text-align: left;
   margin-bottom: 2rem;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   line-height: 1.8;
   color: ${(props) => props.theme.secondaryText};
   max-width: 500px;
@@ -59,7 +59,7 @@ const ContactInfo = styled.div`
   @media (max-width: 768px) {
     text-align: center;
     margin: 0 auto 2rem;
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 
   a {
@@ -107,7 +107,7 @@ const FormGroup = styled.div`
 
   input,
   textarea {
-    background: transparent;
+    background: ${(props) => props.theme.body};
     border: 1px solid ${(props) => props.theme.border};
     border-radius: 8px;
     padding: 0.6rem 0.8rem;
@@ -115,6 +115,10 @@ const FormGroup = styled.div`
     font-size: 1rem;
     font-family: inherit;
     transition: all 0.2s ease;
+
+    &::placeholder {
+      color: ${(props) => props.theme.lightText};
+    }
 
     &:focus {
       outline: none;

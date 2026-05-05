@@ -38,7 +38,7 @@ const NavItem = styled.span`
   }
 `;
 
-const NavLink = ({ navLinkId, scrollToId }) => {
+const NavLink = ({ navLinkId, scrollToId, path }) => {
   const { activeNavLinkId, setActiveNavLinkId } = useContext(NavContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,30 +46,43 @@ const NavLink = ({ navLinkId, scrollToId }) => {
   const handleClick = () => {
     setActiveNavLinkId(navLinkId);
 
-    // If on a project detail page, navigate back to home first
-    if (location.pathname !== "/") {
-      navigate("/");
-      // Wait for the page to render, then scroll
-      setTimeout(() => {
-        const element = document.getElementById(scrollToId);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    } else {
-      // Already on home page, just scroll
+    // Path-based navigation (e.g. /learn)
+    if (path) {
+      navigate(path);
+      return;
+    }
+
+    const scrollToSection = () => {
       const element = document.getElementById(scrollToId);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        const navbarHeight = document.querySelector("nav")?.offsetHeight || 65;
+        const top =
+          element.getBoundingClientRect().top +
+          window.scrollY -
+          navbarHeight -
+          24;
+        window.scrollTo({ top, behavior: "smooth" });
       }
+    };
+
+    // If on a non-home page, navigate back to home first then scroll
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(scrollToSection, 150);
+    } else {
+      scrollToSection();
     }
   };
+
+  const isActive =
+    activeNavLinkId === navLinkId ||
+    (path && location.pathname.startsWith(path));
 
   return (
     <NavItem
       id={navLinkId}
       onClick={handleClick}
-      active={activeNavLinkId === navLinkId}
+      active={isActive}
       role="link"
       title={navLinkId}
       tabIndex="0"

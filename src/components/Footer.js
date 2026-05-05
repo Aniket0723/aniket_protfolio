@@ -5,7 +5,7 @@ const StyledFooter = styled.footer`
   padding: 2rem 1rem;
   text-align: center;
   color: ${(props) => props.theme.lightText};
-  font-family: "Roboto Mono", monospace;
+  font-family: "Victor Mono", monospace;
   font-size: 0.85rem;
   border-top: 1px solid ${(props) => props.theme.border};
   background-color: ${(props) => props.theme.body};
