@@ -6,12 +6,16 @@ import { blogPosts } from "../assets/blogs";
 
 const StyledLearnSection = styled.section`
   color: ${(props) => props.theme.text};
-  padding: 3rem 4rem 6rem;
+  padding: 3rem 4rem 2rem;
   max-width: 1400px;
   margin: 0 auto;
+  min-height: calc(
+    100vh - 65px - 120px
+  ); /* viewport height - navbar - footer */
 
   @media (max-width: 768px) {
-    padding: 2rem 1.5rem 4rem;
+    padding: 2rem 1.5rem 2rem;
+    min-height: calc(100vh - 65px - 120px);
   }
 `;
 
