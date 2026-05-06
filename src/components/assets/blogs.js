@@ -46,27 +46,27 @@ If you stored images directly on your Node.js server, the image lives on the ser
 
 ---
 
-## 3. AWS Services Used in This Project
+## 3. AWS Services Used for This Ecommerce Flow
 
 ### S3 (Simple Storage Service)
 
-Stores product images in the \`products/\` folder inside the \`an-aws-s3-ecommerce\` bucket.
+Stores product images in a bucket. In this guide, we use an example folder/key prefix like \`products/\`, so image files are saved with keys such as \`products/shoe.png\`.
 
 ### IAM (Identity and Access Management)
 
-Controls **who** can access AWS resources and **what** they can do. We created a dedicated IAM user with a custom policy that only allows \`PutObject\` on our specific bucket — nothing else.
+Controls **who** can access AWS resources and **what** they can do. For this kind of app, create a dedicated IAM user with a custom policy that only allows the upload action needed for your selected bucket.
 
 ### CloudFront (CDN — Content Delivery Network)
 
-Sits in front of S3 and serves images from 400+ edge locations worldwide. Users get images from the nearest server instead of always hitting S3 in Mumbai.
+Sits in front of S3 and serves images from edge locations worldwide. Users get images from a nearby CloudFront edge instead of always requesting directly from one S3 region.
 
 ### AWS SDK for JavaScript
 
-The official npm package used in the Node.js backend to interact with S3 — creating presigned URLs, uploading objects.
+The official npm package used in a Node.js backend to interact with S3, such as creating presigned URLs for uploads.
 
 ### AWS S3 Request Presigner
 
-Used to generate time-limited signed URLs that allow the browser to upload directly to S3 without exposing AWS credentials.
+Used to generate time-limited signed URLs. These URLs allow the browser to upload directly to S3 without exposing AWS credentials.
 
 ---
 
@@ -76,11 +76,11 @@ Go to **AWS Console → S3 → Create Bucket**
 
 | Setting | Value | Why |
 | ----------------------- | --------------------- | ------------------------------------------- |
-| Bucket name | \`an-aws-s3-ecommerce\` | Must be globally unique across all AWS |
+| Bucket name | \`your-ecommerce-bucket-name\` | Must be globally unique across all AWS |
 | Region | \`ap-south-1\` (Mumbai) | Closest to your users |
 | Object Ownership | ACLs disabled | Simpler — use bucket policies instead |
 | Block all public access | ✅ ON | Keep bucket private, CloudFront accesses it |
-| Bucket versioning | Disabled | Not needed for this project |
+| Bucket versioning | Disabled | Optional for this beginner flow |
 
 > **Important:** Keep the bucket private. CloudFront will be the only way to serve images publicly. Direct S3 URLs will return 403.
 
@@ -126,7 +126,7 @@ Instead of using a broad managed policy like \`AmazonS3FullAccess\`, create a mi
       "Sid": "AllowProductImageUpload",
       "Effect": "Allow",
       "Action": ["s3:PutObject"],
-      "Resource": "arn:aws:s3:::an-aws-s3-ecommerce/products/*"
+      "Resource": "arn:aws:s3:::your-ecommerce-bucket-name/products/*"
     }
   ]
 }
@@ -183,7 +183,7 @@ A presigned URL is a **temporary, signed HTTP URL** that grants anyone who has i
 
 ### Why it exists
 
-S3 buckets are private. Normally only authenticated AWS users can read/write objects. But we want the browser to upload directly to S3 (to avoid routing large files through our server). The solution: the backend signs a URL using its credentials and hands it to the browser.
+S3 buckets are private. Normally only authenticated AWS users can read/write objects. But in this flow, the browser uploads directly to S3 to avoid routing large files through the backend. The solution: the backend signs a URL using its credentials and hands it to the browser.
 
 - **Without presigned URL:** Browser PUT → S3 → 403 FORBIDDEN (browser has no AWS credentials)
 - **With presigned URL:** Backend signs URL → Browser uses signed URL → PUT → S3 → 200 OK (AWS keys never leave the backend)
@@ -196,7 +196,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import s3Client from "../config/s3.js";
 
 const command = new PutObjectCommand({
-  Bucket: "an-aws-s3-ecommerce",
+  Bucket: "your-ecommerce-bucket-name",
   Key: "products/shoe.png",
 });
 
@@ -302,7 +302,7 @@ function toCloudFrontUrl(filename) {
   } else if (key.includes("cloudfront.net/")) {
     key = key.split("cloudfront.net/")[1];
   }
-  return \`https://d2ocd53kzqw2fg.cloudfront.net/\${key}\`;
+  return \`https://your-cloudfront-domain.cloudfront.net/\${key}\`;
 }
 \`\`\`
 
@@ -347,12 +347,12 @@ Each user hits the nearest CloudFront edge. Only on the first request (cache mis
 | --------------------- | --------------------------- | --------------------------------------------- |
 | Speed | Slow for distant users | Fast everywhere |
 | Cost per request | Higher | Lower after caching |
-| URL | \`s3.amazonaws.com/...\` | \`d2ocd53kzqw2fg.cloudfront.net/...\` |
+| URL | \`s3.amazonaws.com/...\` | \`your-cloudfront-domain.cloudfront.net/...\` |
 | Custom domain + HTTPS | Complex | Built in |
 | Security | Bucket policy needed | S3 stays private, only CloudFront accesses it |
 | Presigned URLs | Required for private bucket | Not needed for reads |
 
-### How it changed our code
+### How this changes backend code
 
 **Before CloudFront** — backend generated a presigned GET URL for every product on every request (expensive, URLs expire after 1 hour):
 
@@ -364,7 +364,7 @@ const signedUrl = await getSignedUrl(client, command, { expiresIn: 3600 });
 **After CloudFront** — backend just builds a plain URL (no AWS SDK call needed for reads):
 
 \`\`\`js
-const url = \`https://d2ocd53kzqw2fg.cloudfront.net/\${key}\`;
+const url = \`https://your-cloudfront-domain.cloudfront.net/\${key}\`;
 \`\`\`
 
 No expiry. No \`GetObjectCommand\`. Just a string.
@@ -377,7 +377,7 @@ Go to **AWS Console → CloudFront → Create Distribution**
 
 | Setting | Value |
 | ---------------------- | ------------------------------------------------------ |
-| Origin domain | \`an-aws-s3-ecommerce.s3.ap-south-1.amazonaws.com\` |
+| Origin domain | \`your-ecommerce-bucket-name.s3.ap-south-1.amazonaws.com\` |
 | Origin access | **Origin access control settings (OAC)** — recommended |
 | Create OAC | Yes — create a new one |
 | Viewer protocol policy | Redirect HTTP to HTTPS |
@@ -396,7 +396,7 @@ After creating the distribution, CloudFront shows you a bucket policy to copy. G
       "Effect": "Allow",
       "Principal": { "Service": "cloudfront.amazonaws.com" },
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::an-aws-s3-ecommerce/*",
+      "Resource": "arn:aws:s3:::your-ecommerce-bucket-name/*",
       "Condition": {
         "StringEquals": {
           "AWS:SourceArn": "arn:aws:cloudfront::<YOUR_ACCOUNT_ID>:distribution/<YOUR_DISTRIBUTION_ID>"
@@ -418,7 +418,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "d2ocd53kzqw2fg.cloudfront.net",
+        hostname: "your-cloudfront-domain.cloudfront.net",
       },
     ],
   },
@@ -432,9 +432,9 @@ const nextConfig = {
 1. Page loads (Next.js server component)
 2. \`GET /api/products\` is called
 3. Backend runs \`ProductModel.find()\` sorted by \`createdAt\` desc
-4. For each product, builds CloudFront URL: \`"products/shoe.png"\` → \`"https://d2ocd53kzqw2fg.cloudfront.net/products/shoe.png"\`
+4. For each product, builds CloudFront URL: \`"products/shoe.png"\` → \`"https://your-cloudfront-domain.cloudfront.net/products/shoe.png"\`
 5. Returns \`{ products: [...] }\` with full URLs
-6. Next.js renders product cards with \`<Image src="https://d2ocd53kzqw2fg.cloudfront.net/...">\`
+6. Next.js renders product cards with \`<Image src="https://your-cloudfront-domain.cloudfront.net/...">\`
 7. CloudFront edge serves cached image
 
 ### Backend fetch code
@@ -606,13 +606,13 @@ function MemoizedProfile() {
   return (
     <div>
       <input value={value} onChange={(e) => setValue(e.target.value)} />
-      <MemoizedProfileCard name="Tapas" />
+      <MemoizedProfileCard name="Aniket" />
     </div>
-  );
+  );+
 }
 \`\`\`
 
-The child receives \`name="Tapas"\`, which never changes. Without memoization, it can still render when the parent renders. With \`React.memo\`, React skips the child render because the prop is unchanged.
+The child receives \`name="Aniket"\`, which never changes. Without memoization, it can still render when the parent renders. With \`React.memo\`, React skips the child render because the prop is unchanged.
 
 ### When should we use React.memo?
 
