@@ -634,13 +634,13 @@ Avoid it when:
 \`React.memo\` uses shallow comparison. For primitives, this works well:
 
 \`\`\`jsx
-<ProfileCard name="Tapas" />
+<ProfileCard name="Aniket" />
 \`\`\`
 
 For objects, arrays, and functions, references matter:
 
 \`\`\`jsx
-<ProfileCard user={{ name: "Tapas" }} />
+<ProfileCard user={{ name: "Aniket" }} />
 \`\`\`
 
 The object above is recreated on every render, so memoization can break unless the object is stabilized with \`useMemo\`.
