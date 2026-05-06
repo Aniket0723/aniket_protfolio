@@ -173,6 +173,9 @@ const PostNumber = styled.span`
 
 const Learn = () => {
   const navigate = useNavigate();
+  const sortedBlogPosts = [...blogPosts].sort(
+    (a, b) => new Date(b.date) - new Date(a.date),
+  );
 
   return (
     <StyledLearnSection id="learnContainer">
@@ -184,7 +187,7 @@ const Learn = () => {
         </SectionSubtitle>
 
         <BlogGrid>
-          {blogPosts.map((post, idx) => (
+          {sortedBlogPosts.map((post, idx) => (
             <BlogCard
               key={post.id}
               onClick={() => navigate(`/learn/${post.id}`)}

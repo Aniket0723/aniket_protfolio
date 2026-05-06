@@ -2,7 +2,22 @@ import React, { useEffect } from "react";
 import styled from "styled-components/macro";
 import { useParams, useNavigate } from "react-router-dom";
 import { blogPosts } from "../assets/blogs";
-import { FaArrowLeft, FaAws } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaAws,
+  FaCodeBranch,
+  FaTools,
+  FaChartLine,
+  FaImage,
+  FaMicrochip,
+  FaLayerGroup,
+  FaServer,
+  FaNetworkWired,
+  FaSitemap,
+  FaShoppingCart,
+  FaStore,
+  FaDatabase,
+} from "react-icons/fa";
 import {
   SiNodedotjs,
   SiNextdotjs,
@@ -12,6 +27,11 @@ import {
   SiCss3,
   SiMongodb,
   SiPostgresql,
+  SiGithubactions,
+  SiJenkins,
+  SiDocker,
+  SiRedux,
+  SiPrisma,
 } from "react-icons/si";
 
 /* ─── Layout ─────────────────────────────────────────────────────────────── */
@@ -19,7 +39,7 @@ import {
 const DetailContainer = styled.div`
   color: ${(props) => props.theme.text};
   padding: 1.5rem 1rem 4rem;
-  max-width: 1000px;
+  max-width: ${(props) => (props.$wide ? "1280px" : "1000px")};
   margin: 0 auto;
   min-height: 100vh;
 
@@ -99,6 +119,24 @@ const tagIconMap = {
   CSS: { icon: <SiCss3 />, color: "#1572B6" },
   MongoDB: { icon: <SiMongodb />, color: "#47A248" },
   PostgreSQL: { icon: <SiPostgresql />, color: "#4169E1" },
+  "CI/CD": { icon: <FaCodeBranch />, color: "#6E7681" },
+  DevOps: { icon: <FaTools />, color: "#8B949E" },
+  "GitHub Actions": { icon: <SiGithubactions />, color: "#2088FF" },
+  Jenkins: { icon: <SiJenkins />, color: "#D24939" },
+  Docker: { icon: <SiDocker />, color: "#2496ED" },
+  Performance: { icon: <FaChartLine />, color: "#2EA043" },
+  "Image Processing": { icon: <FaImage />, color: "#A371F7" },
+  "Worker Threads": { icon: <FaMicrochip />, color: "#F78166" },
+  Jimp: { icon: <FaLayerGroup />, color: "#DBAB09" },
+  Cluster: { icon: <FaSitemap />, color: "#58A6FF" },
+  Scaling: { icon: <FaNetworkWired />, color: "#3FB950" },
+  Express: { icon: <FaServer />, color: "#8B949E" },
+  Redux: { icon: <SiRedux />, color: "#764ABC" },
+  "Redux Toolkit": { icon: <SiRedux />, color: "#764ABC" },
+  Ecommerce: { icon: <FaStore />, color: "#DB6D28" },
+  Cart: { icon: <FaShoppingCart />, color: "#2EA043" },
+  Prisma: { icon: <SiPrisma />, color: "#2D3748" },
+  ORM: { icon: <FaDatabase />, color: "#6E7681" },
 };
 
 /* Title — normal body font, bold */
@@ -276,6 +314,17 @@ const SectionContent = styled.div`
     }
   }
 
+  pre.flow-diagram {
+    width: min(1280px, calc(100vw - 2rem));
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    code {
+      font-size: 0.8rem;
+      line-height: 1.65;
+    }
+  }
+
   blockquote {
     border-left: 3px solid ${(props) => props.theme.secondaryText};
     margin: 1.5rem 0;
@@ -355,15 +404,21 @@ const parseMarkdown = (text) => {
 
     // Code block
     if (line.trim().startsWith("```")) {
+      const fenceInfo = line.trim().slice(3).trim();
       const codeLines = [];
       i++;
       while (i < lines.length && !lines[i].trim().startsWith("```")) {
         codeLines.push(lines[i]);
         i++;
       }
+      const codeText = codeLines.join("\n");
+      const isFlowDiagram =
+        fenceInfo === "text" &&
+        codeText.includes("CI/CD") &&
+        codeText.includes("Developer Phase");
       result.push(
-        <pre key={`pre-${i}`}>
-          <code>{codeLines.join("\n")}</code>
+        <pre key={`pre-${i}`} className={isFlowDiagram ? "flow-diagram" : ""}>
+          <code>{codeText}</code>
         </pre>,
       );
       i++;
@@ -570,7 +625,7 @@ const BlogPost = () => {
   }
 
   return (
-    <DetailContainer>
+    <DetailContainer $wide={post.id === "ci-cd-complete-notes"}>
       <BackButton onClick={() => navigate("/learn")}>
         <FaArrowLeft /> Back to Learn
       </BackButton>
