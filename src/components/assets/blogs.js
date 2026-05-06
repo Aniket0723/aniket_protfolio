@@ -1,7 +1,7 @@
 export const blogPosts = [
   {
     id: "aws-s3-ecommerce",
-    title: "AWS S3 Ecommerce — Complete Notes",
+    title: "AWS S3 Ecommerce",
     date: "May 4, 2026",
     readTime: "20 min read",
     tags: ["AWS", "S3", "CloudFront", "Node.js", "Next.js"],
@@ -492,7 +492,7 @@ export async function getProducts(_req, res, next) {
   },
   {
     id: "react-optimization-patterns",
-    title: "React Optimization Patterns - Complete Blog Notes",
+    title: "React Optimization Patterns",
     date: "May 5, 2026",
     readTime: "35 min read",
     tags: ["React", "JavaScript", "Performance"],
