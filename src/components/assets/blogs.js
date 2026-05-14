@@ -12,26 +12,6 @@ export const blogPosts = [
 
 A full reference for everything used in this project: S3, IAM, CloudFront, presigned URLs, CORS, and how they all connect.
 
-## Table of Contents
-
-1. [What is AWS S3?](#1-what-is-aws-s3)
-2. [Why S3 instead of storing files on the backend?](#2-why-s3-instead-of-storing-files-on-the-backend)
-3. [AWS Services Used in This Project](#3-aws-services-used-in-this-project)
-4. [Step 1 - Create an S3 Bucket](#4-step-1---create-an-s3-bucket)
-5. [Step 2 - Create an IAM User](#5-step-2---create-an-iam-user)
-6. [Step 3 - Configure the S3 SDK in the Backend](#6-step-3---configure-the-s3-sdk-in-the-backend)
-7. [What is a Presigned URL?](#7-what-is-a-presigned-url)
-8. [Upload Flow - How Creating a Product Works](#8-upload-flow---how-creating-a-product-works)
-9. [What is Stored in MongoDB?](#9-what-is-stored-in-mongodb)
-10. [Why CORS is Needed](#10-why-cors-is-needed)
-11. [What is CloudFront?](#11-what-is-cloudfront)
-12. [Step 4 - Set Up CloudFront](#12-step-4---set-up-cloudfront)
-13. [Fetch Flow - How the Home Page Works](#13-fetch-flow---how-the-home-page-works)
-14. [Full Architecture Diagram](#14-full-architecture-diagram)
-15. [Environment Variables Reference](#15-environment-variables-reference)
-
----
-
 ## 1. What is AWS S3?
 
 **S3 = Simple Storage Service**
