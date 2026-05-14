@@ -8,9 +8,31 @@ export const blogPosts = [
     summary:
       "A full reference for everything used in building an ecommerce app with S3 image uploads: S3, IAM, CloudFront, presigned URLs, CORS, and how they all connect.",
     content: `
-## 1. What is AWS S3?
+# AWS S3 Ecommerce - Complete Notes
 
-These notes come from what I learned while practicing image uploads for an ecommerce-style application. The examples use placeholder names so anyone can follow the same flow with their own AWS account, bucket, domain, and backend.
+A full reference for everything used in this project: S3, IAM, CloudFront, presigned URLs, CORS, and how they all connect.
+
+## Table of Contents
+
+1. [What is AWS S3?](#1-what-is-aws-s3)
+2. [Why S3 instead of storing files on the backend?](#2-why-s3-instead-of-storing-files-on-the-backend)
+3. [AWS Services Used in This Project](#3-aws-services-used-in-this-project)
+4. [Step 1 - Create an S3 Bucket](#4-step-1---create-an-s3-bucket)
+5. [Step 2 - Create an IAM User](#5-step-2---create-an-iam-user)
+6. [Step 3 - Configure the S3 SDK in the Backend](#6-step-3---configure-the-s3-sdk-in-the-backend)
+7. [What is a Presigned URL?](#7-what-is-a-presigned-url)
+8. [Upload Flow - How Creating a Product Works](#8-upload-flow---how-creating-a-product-works)
+9. [What is Stored in MongoDB?](#9-what-is-stored-in-mongodb)
+10. [Why CORS is Needed](#10-why-cors-is-needed)
+11. [What is CloudFront?](#11-what-is-cloudfront)
+12. [Step 4 - Set Up CloudFront](#12-step-4---set-up-cloudfront)
+13. [Fetch Flow - How the Home Page Works](#13-fetch-flow---how-the-home-page-works)
+14. [Full Architecture Diagram](#14-full-architecture-diagram)
+15. [Environment Variables Reference](#15-environment-variables-reference)
+
+---
+
+## 1. What is AWS S3?
 
 **S3 = Simple Storage Service**
 
@@ -46,27 +68,107 @@ If you stored images directly on your Node.js server, the image lives on the ser
 - Direct browser-to-S3 upload saves your server bandwidth entirely
 - Pay only for what you store and transfer
 
+### Main reason we use S3 in this project
+
+The backend should store product data, not heavy binary files.
+
+- **MongoDB** stores product metadata: name, price, brand, description, and image key.
+- **S3** stores the actual image file.
+- **Express/Node.js** creates the presigned URL and saves metadata, but it does not carry the image bytes.
+- **CloudFront** serves images quickly to users when products are displayed.
+
+This keeps the backend light. Large file uploads and downloads do not consume Node.js server bandwidth, CPU, or memory.
+
+### Why not store images or videos in MongoDB?
+
+MongoDB can store binary files, but it is usually not the best place for product images, videos, PDFs, or other heavy files.
+
+MongoDB is best for **structured data**:
+
+\`\`\`js
+{
+  name: "Nike Air Max",
+  price: 129.99,
+  brand: "Nike",
+  description: "Lightweight running shoe",
+  imageKey: "products/shoe.png"
+}
+\`\`\`
+
+S3 is best for the **actual file**:
+
+\`\`\`text
+products/shoe.png
+products/watch.webp
+videos/product-demo.mp4
+\`\`\`
+
+Reasons we avoid storing files directly in MongoDB:
+
+- **Database becomes heavy:** images and videos increase database size very quickly.
+- **Slower backups and restores:** large binary files make database maintenance slower.
+- **More load on MongoDB:** every image view would require reading file data from the database.
+- **More load on backend:** the backend would need to receive the file from MongoDB and send it to the browser.
+- **Document size limit:** one MongoDB document can only be up to 16MB. Bigger files require GridFS, which adds extra complexity.
+- **No CDN benefit by default:** files in MongoDB are not automatically served from nearby global edge locations like CloudFront.
+- **Higher cost and poorer scaling:** databases are expensive resources; object storage is cheaper and built for large files.
+
+If images are stored in MongoDB, the read flow becomes:
+
+\`\`\`text
+Browser -> Backend -> MongoDB -> Backend -> Browser
+\`\`\`
+
+With S3 and CloudFront, the read flow becomes:
+
+\`\`\`text
+Browser -> CloudFront -> S3 only on cache miss
+\`\`\`
+
+So the best practice is:
+
+\`\`\`text
+MongoDB = product data and image key
+S3 = actual image/video file
+CloudFront = fast public delivery of that file
+\`\`\`
+
+### Direct upload idea
+
+The browser first asks the backend for permission, then uploads directly to S3:
+
+\`\`\`text
+Browser -> Backend: "Give me a signed upload URL for shoe.png"
+Backend -> S3 SDK: Create presigned PUT URL
+Backend -> Browser: Return signed URL
+Browser -> S3: PUT image directly
+Browser -> Backend: POST product metadata
+Backend -> MongoDB: Save name, price, brand, description, filename
+\`\`\`
+
+The backend is still in control of security, but S3 handles the heavy file transfer.
+
 ---
 
-## 3. AWS Services Used for This Ecommerce Flow
+## 3. AWS Services Used in This Project
 
 ### S3 (Simple Storage Service)
 
-Stores product images in a bucket. In this guide, we use an example folder/key prefix like \`products/\`, so image files are saved with keys such as \`products/shoe.png\`.
+Stores product images in the \`products/\` folder inside the ecommerce S3 bucket.
 
 ### IAM (Identity and Access Management)
 
-Controls **who** can access AWS resources and **what** they can do. For this kind of app, create a dedicated IAM user with a custom policy that only allows the upload action needed for your selected bucket.
+Controls **who** can access AWS resources and **what** they can do. We create a dedicated IAM user with a custom policy that only allows \`PutObject\` on the product image path in the selected bucket.
 
 ### CloudFront (CDN — Content Delivery Network)
 
-Sits in front of S3 and serves images from edge locations worldwide. Users get images from a nearby CloudFront edge instead of always requesting directly from one S3 region.
+Sits in front of S3 and serves images from 400+ edge locations worldwide. Users get images from a nearby CloudFront edge instead of always requesting directly from the S3 region.
 
-### AWS SDK for JavaScript
+### AWS SDK for JavaScript (\`@aws-sdk/client-s3\`)
 
 The official npm package used in a Node.js backend to interact with S3, such as creating presigned URLs for uploads.
 
-### AWS S3 Request Presigner
+### AWS S3 Request Presigner (\`@aws-sdk/s3-request-presigner\`)
 
 Used to generate time-limited signed URLs. These URLs allow the browser to upload directly to S3 without exposing AWS credentials.
 
@@ -78,11 +180,11 @@ Go to **AWS Console → S3 → Create Bucket**
 
 | Setting | Value | Why |
 | ----------------------- | --------------------- | ------------------------------------------- |
-| Bucket name | \`your-ecommerce-bucket-name\` | Must be globally unique across all AWS |
+| Bucket name | \`an-aws-s3-ecommerce\` | Must be globally unique across all AWS |
 | Region | \`ap-south-1\` (Mumbai) | Closest to your users |
 | Object Ownership | ACLs disabled | Simpler — use bucket policies instead |
 | Block all public access | ✅ ON | Keep bucket private, CloudFront accesses it |
-| Bucket versioning | Disabled | Optional for this beginner flow |
+| Bucket versioning | Disabled | Not needed for this project |
 
 > **Important:** Keep the bucket private. CloudFront will be the only way to serve images publicly. Direct S3 URLs will return 403.
 
@@ -95,13 +197,13 @@ Since the browser uploads directly to S3 from a different origin, S3 needs a COR
   {
     "AllowedHeaders": ["*"],
     "AllowedMethods": ["PUT", "GET"],
-    "AllowedOrigins": ["https://your-app-domain.com"],
+    "AllowedOrigins": ["http://localhost:3000"],
     "ExposeHeaders": []
   }
 ]
 \`\`\`
 
-Replace \`https://your-app-domain.com\` with the real domain where your frontend is hosted.
+For production, replace \`http://localhost:3000\` with the real domain where your frontend is hosted.
 
 ---
 
@@ -113,7 +215,7 @@ IAM lets you create users with specific, limited permissions. Never use your roo
 
 Go to **AWS Console → IAM → Users → Create User**
 
-- Name: \`s3-upload-user\`
+- Name: \`aws-s3-ecommerce-user\`
 - Access type: **Programmatic access only** (no AWS Console login needed)
 
 ### Create a Custom Policy
@@ -128,7 +230,7 @@ Instead of using a broad managed policy like \`AmazonS3FullAccess\`, create a mi
       "Sid": "AllowProductImageUpload",
       "Effect": "Allow",
       "Action": ["s3:PutObject"],
-      "Resource": "arn:aws:s3:::your-ecommerce-bucket-name/products/*"
+      "Resource": "arn:aws:s3:::an-aws-s3-ecommerce/products/*"
     }
   ]
 }
@@ -148,6 +250,13 @@ Go to **IAM → Users → your user → Security credentials → Create access k
 - Download the CSV or copy the keys immediately — the secret key is shown only once
 
 Store these in your \`.env\` file — never commit them to git.
+
+Do not paste real access keys into code, documentation, screenshots, or commits. Keep examples masked:
+
+\`\`\`text
+Access Key ID:     AKIA************
+Secret Access Key: ****************
+\`\`\`
 
 ---
 
@@ -198,7 +307,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import s3Client from "./s3Client.js";
 
 const command = new PutObjectCommand({
-  Bucket: "your-ecommerce-bucket-name",
+  Bucket: "an-aws-s3-ecommerce",
   Key: "products/shoe.png",
 });
 
@@ -207,6 +316,46 @@ const presignedUrl = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
 \`\`\`
 
 The browser does a \`PUT\` to this URL with the image as the body. S3 verifies the signature and stores the file.
+
+### PUT presigned URL vs GET presigned URL
+
+Presigned URLs can be created for different S3 actions:
+
+| Use case | S3 command | Browser method | Why |
+| -------- | ---------- | -------------- | --- |
+| Upload image | \`PutObjectCommand\` | \`PUT\` | Allows browser to upload directly to private S3 |
+| View image directly from private S3 | \`GetObjectCommand\` | \`GET\` | Allows browser to read one private object temporarily |
+
+For uploads, this project uses a **presigned PUT URL**.
+
+For viewing products, there are two possible approaches:
+
+1. **Direct S3 read with presigned GET URL**
+
+   The backend fetches products from MongoDB, then generates a temporary GET URL for every product image.
+
+   \`\`\`js
+   const command = new GetObjectCommand({
+     Bucket: process.env.BUCKET,
+     Key: "products/shoe.png",
+   });
+
+   const imageUrl = await getSignedUrl(s3Client, command, {
+     expiresIn: 3600,
+   });
+   \`\`\`
+
+   This works, but every \`GET /api/products\` request needs AWS signing work, and image URLs expire.
+
+2. **CloudFront read URL**
+
+   The backend fetches products from MongoDB, then builds a CloudFront URL from the saved S3 key.
+
+   \`\`\`js
+   const imageUrl = \`https://d2ocd53kzqw2fg.cloudfront.net/products/shoe.png\`;
+   \`\`\`
+
+   This is better for production because CloudFront caches images near users and the backend does not need to generate read signatures for every product.
 
 ### Filename Sanitization
 
@@ -239,11 +388,14 @@ This prevents issues like \`71Iit7U1S+L.jpg\` being misread as \`71Iit7U1S L.jpg
 
 \`\`\`js
 // Step 1: Get presigned URL
-const presignRes = await fetch("/api/upload/presigned-url", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ fileName: form.image.name }),
-});
+const presignRes = await fetch(
+  "http://localhost:3001/api/upload/presigned-url",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ fileName: form.image.name }),
+  },
+);
 const { url, finalName } = await presignRes.json();
 
 // Step 2: Upload directly to S3
@@ -254,7 +406,7 @@ await fetch(url, {
 });
 
 // Step 3: Save product metadata to MongoDB
-await fetch("/api/products", {
+await fetch("http://localhost:3001/api/products", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
@@ -304,7 +456,7 @@ function toCloudFrontUrl(filename) {
   } else if (key.includes("cloudfront.net/")) {
     key = key.split("cloudfront.net/")[1];
   }
-  return \`https://your-cloudfront-domain.cloudfront.net/\${key}\`;
+  return \`https://d2ocd53kzqw2fg.cloudfront.net/\${key}\`;
 }
 \`\`\`
 
@@ -349,7 +501,7 @@ Each user hits the nearest CloudFront edge. Only on the first request (cache mis
 | --------------------- | --------------------------- | --------------------------------------------- |
 | Speed | Slow for distant users | Fast everywhere |
 | Cost per request | Higher | Lower after caching |
-| URL | \`s3.amazonaws.com/...\` | \`your-cloudfront-domain.cloudfront.net/...\` |
+| URL | \`s3.amazonaws.com/...\` | \`d2ocd53kzqw2fg.cloudfront.net/...\` |
 | Custom domain + HTTPS | Complex | Built in |
 | Security | Bucket policy needed | S3 stays private, only CloudFront accesses it |
 | Presigned URLs | Required for private bucket | Not needed for reads |
@@ -366,7 +518,7 @@ const signedUrl = await getSignedUrl(client, command, { expiresIn: 3600 });
 **After CloudFront** — backend just builds a plain URL (no AWS SDK call needed for reads):
 
 \`\`\`js
-const url = \`https://your-cloudfront-domain.cloudfront.net/\${key}\`;
+const url = \`https://d2ocd53kzqw2fg.cloudfront.net/\${key}\`;
 \`\`\`
 
 No expiry. No \`GetObjectCommand\`. Just a string.
@@ -379,7 +531,7 @@ Go to **AWS Console → CloudFront → Create Distribution**
 
 | Setting | Value |
 | ---------------------- | ------------------------------------------------------ |
-| Origin domain | \`your-ecommerce-bucket-name.s3.ap-south-1.amazonaws.com\` |
+| Origin domain | \`an-aws-s3-ecommerce.s3.ap-south-1.amazonaws.com\` |
 | Origin access | **Origin access control settings (OAC)** — recommended |
 | Create OAC | Yes — create a new one |
 | Viewer protocol policy | Redirect HTTP to HTTPS |
@@ -398,7 +550,7 @@ After creating the distribution, CloudFront shows you a bucket policy to copy. G
       "Effect": "Allow",
       "Principal": { "Service": "cloudfront.amazonaws.com" },
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::your-ecommerce-bucket-name/*",
+      "Resource": "arn:aws:s3:::an-aws-s3-ecommerce/*",
       "Condition": {
         "StringEquals": {
           "AWS:SourceArn": "arn:aws:cloudfront::<YOUR_ACCOUNT_ID>:distribution/<YOUR_DISTRIBUTION_ID>"
@@ -420,7 +572,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "your-cloudfront-domain.cloudfront.net",
+        hostname: "d2ocd53kzqw2fg.cloudfront.net",
       },
     ],
   },
@@ -434,9 +586,9 @@ const nextConfig = {
 1. Page loads (Next.js server component)
 2. \`GET /api/products\` is called
 3. Backend runs \`ProductModel.find()\` sorted by \`createdAt\` desc
-4. For each product, builds CloudFront URL: \`"products/shoe.png"\` → \`"https://your-cloudfront-domain.cloudfront.net/products/shoe.png"\`
+4. For each product, builds CloudFront URL: \`"products/shoe.png"\` → \`"https://d2ocd53kzqw2fg.cloudfront.net/products/shoe.png"\`
 5. Returns \`{ products: [...] }\` with full URLs
-6. Next.js renders product cards with \`<Image src="https://your-cloudfront-domain.cloudfront.net/...">\`
+6. Next.js renders product cards with \`<Image src="https://d2ocd53kzqw2fg.cloudfront.net/...">\`
 7. CloudFront edge serves cached image
 
 ### Example Backend Fetch Code
@@ -477,7 +629,67 @@ export async function getProducts(_req, res, next) {
 
 ---
 
-## 14. Environment Variables Reference
+### Important fetch detail
+
+\`GET /api/products\` does **not** fetch image bytes from S3. It only fetches product documents from MongoDB and converts each saved S3 key into a browser-loadable image URL.
+
+With CloudFront:
+
+\`\`\`text
+MongoDB stores:
+filename: "products/shoe.png"
+
+Backend returns:
+filename: "https://d2ocd53kzqw2fg.cloudfront.net/products/shoe.png"
+
+Browser loads:
+<img src="https://d2ocd53kzqw2fg.cloudfront.net/products/shoe.png">
+\`\`\`
+
+CloudFront then handles the real image delivery. If the image is already cached at the nearest edge location, S3 is not contacted again.
+
+---
+
+## 14. Full Architecture Diagram
+
+\`\`\`text
+UPLOAD FLOW
+
+Browser              Backend (3001)              S3 Bucket              MongoDB
+-------              --------------              ---------              -------
+Fill form
+   |
+   | POST /api/upload/presigned-url
+   |-------------------------------> Sign URL
+   |<------------------------------- { url, finalName }
+   |
+   | PUT image directly
+   |-----------------------------------------------> Store object
+   |
+   | POST /api/products { name, filename }
+   |-------------------------------> Save product ---------------------> document
+   |<------------------------------- success
+\`\`\`
+
+\`\`\`text
+FETCH FLOW
+
+Browser              Backend (3001)              MongoDB                CloudFront
+-------              --------------              -------                ----------
+Page loads
+   |
+   | GET /api/products
+   |-------------------------------> Find products
+   |                                  Build CloudFront URLs
+   |<------------------------------- { products: [...] }
+   |
+   | <Image src="cloudfront.net/...">
+   |-------------------------------------------------------------------> Serve cached image
+\`\`\`
+
+---
+
+## 15. Environment Variables Reference
 
 ### Backend Environment Variables
 
